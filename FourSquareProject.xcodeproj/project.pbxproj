@@ -19,7 +19,6 @@
 		B76B1D6D240086F00075A8E4 /* SavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D6C240086F00075A8E4 /* SavedView.swift */; };
 		B76B1D6F240087690075A8E4 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D6E240087690075A8E4 /* DetailView.swift */; };
 		B76B1D71240087A00075A8E4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D70240087A00075A8E4 /* DetailViewController.swift */; };
-		B76B1DC52403F8560075A8E4 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DC42403F8560075A8E4 /* Config.swift */; };
 		B76B1DC82403F96E0075A8E4 /* ImageKit in Frameworks */ = {isa = PBXBuildFile; productRef = B76B1DC72403F96E0075A8E4 /* ImageKit */; };
 		B76B1DCA2403FA060075A8E4 /* FourSquareTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DC92403FA060075A8E4 /* FourSquareTabController.swift */; };
 		B76B1DCC2403FE7B0075A8E4 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DCB2403FE7B0075A8E4 /* Venue.swift */; };
@@ -27,6 +26,8 @@
 		B76B1DF5240468520075A8E4 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DF4240468520075A8E4 /* Photo.swift */; };
 		B76B1DF7240470190075A8E4 /* VenueApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DF6240470190075A8E4 /* VenueApiClient.swift */; };
 		B76B1DFF240475B30075A8E4 /* FourSquareProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DFE240475B30075A8E4 /* FourSquareProjectTests.swift */; };
+		C616061F24047F4C001811A4 /* MapViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616061E24047F4C001811A4 /* MapViewCell.swift */; };
+		C6C74FA72404802200CF5629 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C74FA62404802200CF5629 /* Config.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +55,6 @@
 		B76B1D6C240086F00075A8E4 /* SavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedView.swift; sourceTree = "<group>"; };
 		B76B1D6E240087690075A8E4 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		B76B1D70240087A00075A8E4 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		B76B1DC42403F8560075A8E4 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		B76B1DC92403FA060075A8E4 /* FourSquareTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourSquareTabController.swift; sourceTree = "<group>"; };
 		B76B1DCB2403FE7B0075A8E4 /* Venue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 		B76B1DF12404618A0075A8E4 /* CoreLocationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationSession.swift; sourceTree = "<group>"; };
@@ -63,6 +63,8 @@
 		B76B1DFC240475B30075A8E4 /* FourSquareProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FourSquareProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B76B1DFE240475B30075A8E4 /* FourSquareProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourSquareProjectTests.swift; sourceTree = "<group>"; };
 		B76B1E00240475B30075A8E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C616061E24047F4C001811A4 /* MapViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewCell.swift; sourceTree = "<group>"; };
+		C6C74FA62404802200CF5629 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			children = (
 				B76B1DF3240461980075A8E4 /* CoreLocation */,
 				B76B1D60240074FE0075A8E4 /* SupportingFiles */,
+				C616061D24047F10001811A4 /* Cell */,
 				B76B1D5F240074F00075A8E4 /* Views */,
 				B76B1D5E240074E30075A8E4 /* ViewControllers */,
 				B76B1D72240087A80075A8E4 /* Model */,
@@ -146,7 +149,7 @@
 				B76B1D4C240072020075A8E4 /* SceneDelegate.swift */,
 				B76B1D53240072040075A8E4 /* Assets.xcassets */,
 				B76B1D55240072040075A8E4 /* LaunchScreen.storyboard */,
-				B76B1DC42403F8560075A8E4 /* Config.swift */,
+				C6C74FA62404802200CF5629 /* Config.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -183,6 +186,14 @@
 				B76B1E00240475B30075A8E4 /* Info.plist */,
 			);
 			path = FourSquareProjectTests;
+			sourceTree = "<group>";
+		};
+		C616061D24047F10001811A4 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C616061E24047F4C001811A4 /* MapViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,8 +306,8 @@
 				B76B1D6F240087690075A8E4 /* DetailView.swift in Sources */,
 				B76B1DF22404618A0075A8E4 /* CoreLocationSession.swift in Sources */,
 				B76B1D4B240072020075A8E4 /* AppDelegate.swift in Sources */,
+				C6C74FA72404802200CF5629 /* Config.swift in Sources */,
 				B76B1D692400766E0075A8E4 /* MapView.swift in Sources */,
-				B76B1DC52403F8560075A8E4 /* Config.swift in Sources */,
 				B76B1D63240076110075A8E4 /* MapViewController.swift in Sources */,
 				B76B1D6B240076790075A8E4 /* ListView.swift in Sources */,
 				B76B1D65240076230075A8E4 /* ListViewController.swift in Sources */,
@@ -304,6 +315,7 @@
 				B76B1DCA2403FA060075A8E4 /* FourSquareTabController.swift in Sources */,
 				B76B1DF7240470190075A8E4 /* VenueApiClient.swift in Sources */,
 				B76B1D71240087A00075A8E4 /* DetailViewController.swift in Sources */,
+				C616061F24047F4C001811A4 /* MapViewCell.swift in Sources */,
 				B76B1D672400764C0075A8E4 /* SavedViewController.swift in Sources */,
 				B76B1DCC2403FE7B0075A8E4 /* Venue.swift in Sources */,
 				B76B1D4D240072020075A8E4 /* SceneDelegate.swift in Sources */,
