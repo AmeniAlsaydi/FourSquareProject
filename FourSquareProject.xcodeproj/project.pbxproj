@@ -19,6 +19,7 @@
 		B76B1D6D240086F00075A8E4 /* SavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D6C240086F00075A8E4 /* SavedView.swift */; };
 		B76B1D6F240087690075A8E4 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D6E240087690075A8E4 /* DetailView.swift */; };
 		B76B1D71240087A00075A8E4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D70240087A00075A8E4 /* DetailViewController.swift */; };
+		B76B1DC52403F8560075A8E4 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DC42403F8560075A8E4 /* Config.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		B76B1D6C240086F00075A8E4 /* SavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedView.swift; sourceTree = "<group>"; };
 		B76B1D6E240087690075A8E4 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		B76B1D70240087A00075A8E4 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		B76B1DC42403F8560075A8E4 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				B76B1D4C240072020075A8E4 /* SceneDelegate.swift */,
 				B76B1D53240072040075A8E4 /* Assets.xcassets */,
 				B76B1D55240072040075A8E4 /* LaunchScreen.storyboard */,
+				B76B1DC42403F8560075A8E4 /* Config.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 				B76B1D6F240087690075A8E4 /* DetailView.swift in Sources */,
 				B76B1D4B240072020075A8E4 /* AppDelegate.swift in Sources */,
 				B76B1D692400766E0075A8E4 /* MapView.swift in Sources */,
+				B76B1DC52403F8560075A8E4 /* Config.swift in Sources */,
 				B76B1D63240076110075A8E4 /* MapViewController.swift in Sources */,
 				B76B1D6B240076790075A8E4 /* ListView.swift in Sources */,
 				B76B1D65240076230075A8E4 /* ListViewController.swift in Sources */,
