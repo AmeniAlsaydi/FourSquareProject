@@ -15,6 +15,10 @@ class MapViewController: UIViewController {
     
     private var mapView = MapView()
     
+    private var listView = ListView()
+    
+    private var isButtonPressed = false
+    
     init(_ dataPersistance: DataPersistence<Venue>) {
         self.datapersistance = dataPersistance
         super.init(nibName: nil, bundle: nil)
@@ -31,8 +35,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Search Venue"
+        configureNavBar()
 
         //collectionView
         mapView.collectionView.register(MapViewCell.self, forCellWithReuseIdentifier: "mapViewCell")
@@ -41,7 +44,21 @@ class MapViewController: UIViewController {
         
     }
     
+    private func configureNavBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "Search Venue"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), style: .plain, target: self, action: #selector(barButtonPressed(sender:)))
+    }
     
+    @objc private func barButtonPressed(sender: UIBarButtonItem) {
+        isButtonPressed.toggle()
+        
+        if isButtonPressed {
+            view = listView
+        } else {
+            view = mapView
+        }
+    }
 
 }
 
