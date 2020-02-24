@@ -23,6 +23,7 @@
 		B76B1DC82403F96E0075A8E4 /* ImageKit in Frameworks */ = {isa = PBXBuildFile; productRef = B76B1DC72403F96E0075A8E4 /* ImageKit */; };
 		B76B1DCA2403FA060075A8E4 /* FourSquareTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DC92403FA060075A8E4 /* FourSquareTabController.swift */; };
 		B76B1DCC2403FE7B0075A8E4 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DCB2403FE7B0075A8E4 /* Venue.swift */; };
+		B76B1DF22404618A0075A8E4 /* CoreLocationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DF12404618A0075A8E4 /* CoreLocationSession.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		B76B1DC42403F8560075A8E4 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		B76B1DC92403FA060075A8E4 /* FourSquareTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourSquareTabController.swift; sourceTree = "<group>"; };
 		B76B1DCB2403FE7B0075A8E4 /* Venue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
+		B76B1DF12404618A0075A8E4 /* CoreLocationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationSession.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 		B76B1D49240072020075A8E4 /* FourSquareProject */ = {
 			isa = PBXGroup;
 			children = (
+				B76B1DF3240461980075A8E4 /* CoreLocation */,
 				B76B1D60240074FE0075A8E4 /* SupportingFiles */,
 				B76B1D5F240074F00075A8E4 /* Views */,
 				B76B1D5E240074E30075A8E4 /* ViewControllers */,
@@ -134,6 +137,14 @@
 				B76B1DCB2403FE7B0075A8E4 /* Venue.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B76B1DF3240461980075A8E4 /* CoreLocation */ = {
+			isa = PBXGroup;
+			children = (
+				B76B1DF12404618A0075A8E4 /* CoreLocationSession.swift */,
+			);
+			path = CoreLocation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +225,7 @@
 			files = (
 				B76B1D6D240086F00075A8E4 /* SavedView.swift in Sources */,
 				B76B1D6F240087690075A8E4 /* DetailView.swift in Sources */,
+				B76B1DF22404618A0075A8E4 /* CoreLocationSession.swift in Sources */,
 				B76B1D4B240072020075A8E4 /* AppDelegate.swift in Sources */,
 				B76B1D692400766E0075A8E4 /* MapView.swift in Sources */,
 				B76B1DC52403F8560075A8E4 /* Config.swift in Sources */,
