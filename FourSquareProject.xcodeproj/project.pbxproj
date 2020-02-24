@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,6 +20,9 @@
 		B76B1D6F240087690075A8E4 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D6E240087690075A8E4 /* DetailView.swift */; };
 		B76B1D71240087A00075A8E4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D70240087A00075A8E4 /* DetailViewController.swift */; };
 		B76B1DC52403F8560075A8E4 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DC42403F8560075A8E4 /* Config.swift */; };
+		B76B1DC82403F96E0075A8E4 /* ImageKit in Frameworks */ = {isa = PBXBuildFile; productRef = B76B1DC72403F96E0075A8E4 /* ImageKit */; };
+		B76B1DCA2403FA060075A8E4 /* FourSquareTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DC92403FA060075A8E4 /* FourSquareTabController.swift */; };
+		B76B1DCC2403FE7B0075A8E4 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DCB2403FE7B0075A8E4 /* Venue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,8 @@
 		B76B1D6E240087690075A8E4 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		B76B1D70240087A00075A8E4 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		B76B1DC42403F8560075A8E4 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		B76B1DC92403FA060075A8E4 /* FourSquareTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourSquareTabController.swift; sourceTree = "<group>"; };
+		B76B1DCB2403FE7B0075A8E4 /* Venue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B76B1DC82403F96E0075A8E4 /* ImageKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +89,7 @@
 		B76B1D5E240074E30075A8E4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				B76B1DC92403FA060075A8E4 /* FourSquareTabController.swift */,
 				B76B1D62240076110075A8E4 /* MapViewController.swift */,
 				B76B1D70240087A00075A8E4 /* DetailViewController.swift */,
 				B76B1D64240076230075A8E4 /* ListViewController.swift */,
@@ -124,6 +131,7 @@
 		B76B1D72240087A80075A8E4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B76B1DCB2403FE7B0075A8E4 /* Venue.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -144,6 +152,9 @@
 			dependencies = (
 			);
 			name = FourSquareProject;
+			packageProductDependencies = (
+				B76B1DC72403F96E0075A8E4 /* ImageKit */,
+			);
 			productName = FourSquareProject;
 			productReference = B76B1D47240072020075A8E4 /* FourSquareProject.app */;
 			productType = "com.apple.product-type.application";
@@ -172,6 +183,9 @@
 				Base,
 			);
 			mainGroup = B76B1D3E240072020075A8E4;
+			packageReferences = (
+				B76B1DC62403F96E0075A8E4 /* XCRemoteSwiftPackageReference "ImageKit" */,
+			);
 			productRefGroup = B76B1D48240072020075A8E4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -206,8 +220,10 @@
 				B76B1D63240076110075A8E4 /* MapViewController.swift in Sources */,
 				B76B1D6B240076790075A8E4 /* ListView.swift in Sources */,
 				B76B1D65240076230075A8E4 /* ListViewController.swift in Sources */,
+				B76B1DCA2403FA060075A8E4 /* FourSquareTabController.swift in Sources */,
 				B76B1D71240087A00075A8E4 /* DetailViewController.swift in Sources */,
 				B76B1D672400764C0075A8E4 /* SavedViewController.swift in Sources */,
+				B76B1DCC2403FE7B0075A8E4 /* Venue.swift in Sources */,
 				B76B1D4D240072020075A8E4 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -398,6 +414,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B76B1DC62403F96E0075A8E4 /* XCRemoteSwiftPackageReference "ImageKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alexpaul/ImageKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B76B1DC72403F96E0075A8E4 /* ImageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B76B1DC62403F96E0075A8E4 /* XCRemoteSwiftPackageReference "ImageKit" */;
+			productName = ImageKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B76B1D3F240072020075A8E4 /* Project object */;
 }
