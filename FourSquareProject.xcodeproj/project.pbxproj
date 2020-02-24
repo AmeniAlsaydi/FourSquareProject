@@ -26,7 +26,6 @@
 		B76B1DF5240468520075A8E4 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DF4240468520075A8E4 /* Photo.swift */; };
 		B76B1DF7240470190075A8E4 /* VenueApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DF6240470190075A8E4 /* VenueApiClient.swift */; };
 		B76B1DFF240475B30075A8E4 /* FourSquareProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DFE240475B30075A8E4 /* FourSquareProjectTests.swift */; };
-		C616061F24047F4C001811A4 /* MapViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616061E24047F4C001811A4 /* MapViewCell.swift */; };
 		C6C74FA72404802200CF5629 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C74FA62404802200CF5629 /* Config.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,7 +62,6 @@
 		B76B1DFC240475B30075A8E4 /* FourSquareProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FourSquareProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B76B1DFE240475B30075A8E4 /* FourSquareProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourSquareProjectTests.swift; sourceTree = "<group>"; };
 		B76B1E00240475B30075A8E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C616061E24047F4C001811A4 /* MapViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewCell.swift; sourceTree = "<group>"; };
 		C6C74FA62404802200CF5629 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,7 +107,6 @@
 			children = (
 				B76B1DF3240461980075A8E4 /* CoreLocation */,
 				B76B1D60240074FE0075A8E4 /* SupportingFiles */,
-				C616061D24047F10001811A4 /* Cell */,
 				B76B1D5F240074F00075A8E4 /* Views */,
 				B76B1D5E240074E30075A8E4 /* ViewControllers */,
 				B76B1D72240087A80075A8E4 /* Model */,
@@ -186,14 +183,6 @@
 				B76B1E00240475B30075A8E4 /* Info.plist */,
 			);
 			path = FourSquareProjectTests;
-			sourceTree = "<group>";
-		};
-		C616061D24047F10001811A4 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				C616061E24047F4C001811A4 /* MapViewCell.swift */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,7 +304,6 @@
 				B76B1DCA2403FA060075A8E4 /* FourSquareTabController.swift in Sources */,
 				B76B1DF7240470190075A8E4 /* VenueApiClient.swift in Sources */,
 				B76B1D71240087A00075A8E4 /* DetailViewController.swift in Sources */,
-				C616061F24047F4C001811A4 /* MapViewCell.swift in Sources */,
 				B76B1D672400764C0075A8E4 /* SavedViewController.swift in Sources */,
 				B76B1DCC2403FE7B0075A8E4 /* Venue.swift in Sources */,
 				B76B1D4D240072020075A8E4 /* SceneDelegate.swift in Sources */,
