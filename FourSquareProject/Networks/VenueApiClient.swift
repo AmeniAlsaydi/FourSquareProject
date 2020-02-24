@@ -14,8 +14,12 @@ struct VenueApiClient {
     
     static func getVenues(state: String, searchQuery: String, completeion: @escaping (Result<[Venue], AppError>) -> ()) {
        
-        let endpoint = "https://api.foursquare.com/v2/venues/search?client_id= \(Config.clientID)&client_secret=\(Config.clientSecret)&near=\(state)&query=\(searchQuery)&v=20211010"
-                
+        let searchQuery = searchQuery.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "target"
+        let state = state.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "miami"
+        
+        let endpoint = "https://api.foursquare.com/v2/venues/search?client_id=\(Config.clientID)&client_secret=\(Config.clientSecret)&near=\(state)&query=\(searchQuery)&v=20211010"
+         
+        
         guard let url = URL(string: endpoint) else {
             completeion(.failure(.badURL(endpoint)))
             return
