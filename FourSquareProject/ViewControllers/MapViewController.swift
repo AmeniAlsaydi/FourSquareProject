@@ -55,8 +55,10 @@ class MapViewController: UIViewController {
         
         if isButtonPressed {
             view = listView
+            sender.image = UIImage(systemName: "mappin.and.ellipse")
         } else {
             view = mapView
+            sender.image = UIImage(systemName: "list.bullet")
         }
     }
 
