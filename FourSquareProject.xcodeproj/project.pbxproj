@@ -24,6 +24,8 @@
 		B76B1DCA2403FA060075A8E4 /* FourSquareTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DC92403FA060075A8E4 /* FourSquareTabController.swift */; };
 		B76B1DCC2403FE7B0075A8E4 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DCB2403FE7B0075A8E4 /* Venue.swift */; };
 		B76B1DF22404618A0075A8E4 /* CoreLocationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DF12404618A0075A8E4 /* CoreLocationSession.swift */; };
+		B76B1DF5240468520075A8E4 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DF4240468520075A8E4 /* Photo.swift */; };
+		B76B1DF7240470190075A8E4 /* VenueApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DF6240470190075A8E4 /* VenueApiClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		B76B1DC92403FA060075A8E4 /* FourSquareTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourSquareTabController.swift; sourceTree = "<group>"; };
 		B76B1DCB2403FE7B0075A8E4 /* Venue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 		B76B1DF12404618A0075A8E4 /* CoreLocationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationSession.swift; sourceTree = "<group>"; };
+		B76B1DF4240468520075A8E4 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		B76B1DF6240470190075A8E4 /* VenueApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueApiClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +131,7 @@
 		B76B1D612400751E0075A8E4 /* Networks */ = {
 			isa = PBXGroup;
 			children = (
+				B76B1DF6240470190075A8E4 /* VenueApiClient.swift */,
 			);
 			path = Networks;
 			sourceTree = "<group>";
@@ -135,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				B76B1DCB2403FE7B0075A8E4 /* Venue.swift */,
+				B76B1DF4240468520075A8E4 /* Photo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -232,7 +238,9 @@
 				B76B1D63240076110075A8E4 /* MapViewController.swift in Sources */,
 				B76B1D6B240076790075A8E4 /* ListView.swift in Sources */,
 				B76B1D65240076230075A8E4 /* ListViewController.swift in Sources */,
+				B76B1DF5240468520075A8E4 /* Photo.swift in Sources */,
 				B76B1DCA2403FA060075A8E4 /* FourSquareTabController.swift in Sources */,
+				B76B1DF7240470190075A8E4 /* VenueApiClient.swift in Sources */,
 				B76B1D71240087A00075A8E4 /* DetailViewController.swift in Sources */,
 				B76B1D672400764C0075A8E4 /* SavedViewController.swift in Sources */,
 				B76B1DCC2403FE7B0075A8E4 /* Venue.swift in Sources */,

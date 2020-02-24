@@ -8,6 +8,30 @@
 
 import Foundation
 
+
+struct VenueSearch: Codable & Equatable {
+    let response: [Response]
+}
+
+struct Response: Codable & Equatable {
+    let venues: [Venue]
+}
+
 struct Venue: Codable & Equatable  {
-    
+    let id: String
+    let name: String
+    let location: Location
+}
+
+struct Location: Codable & Equatable{
+    let address: String
+    let crossStreet: String?
+    let lat: Double
+    let lng: Double
+    let postalCode: String
+    let cc: String
+    let city: String
+    let state: String
+    let country: String
+    let formattedAddress: [String]
 }
