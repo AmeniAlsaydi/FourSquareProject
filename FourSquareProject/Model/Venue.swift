@@ -10,7 +10,7 @@ import Foundation
 
 
 struct VenueSearch: Codable & Equatable {
-    let response: [Response]
+    let response: Response
 }
 
 struct Response: Codable & Equatable {
