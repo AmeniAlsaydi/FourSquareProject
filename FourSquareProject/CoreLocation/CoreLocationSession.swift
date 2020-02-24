@@ -81,15 +81,15 @@ class CoreLocationSession: NSObject {
   
   // monitor a CLRegion
   // a CLRegion is made up of a center coordinate and a radius in meters
-  private func startMonitoringRegion() {
-    let location = Location.getLocations()[2] // central park
-    let identifier = "monitoring region"
-    let region = CLCircularRegion(center: location.coordinate, radius: 500, identifier: identifier)
-    region.notifyOnEntry = true
-    region.notifyOnExit = false
-    
-    locationManager.startMonitoring(for: region)
-  }
+//  private func startMonitoringRegion() {
+//    let location = Location.getLocations()[2] // central park
+//    let identifier = "monitoring region"
+//    let region = CLCircularRegion(center: location.coordinate, radius: 500, identifier: identifier)
+//    region.notifyOnEntry = true
+//    region.notifyOnExit = false
+//    
+//    locationManager.startMonitoring(for: region)
+//  }
 }
 
 extension CoreLocationSession: CLLocationManagerDelegate {

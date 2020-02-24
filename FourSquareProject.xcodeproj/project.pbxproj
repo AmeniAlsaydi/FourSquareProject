@@ -24,7 +24,20 @@
 		B76B1DCA2403FA060075A8E4 /* FourSquareTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DC92403FA060075A8E4 /* FourSquareTabController.swift */; };
 		B76B1DCC2403FE7B0075A8E4 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DCB2403FE7B0075A8E4 /* Venue.swift */; };
 		B76B1DF22404618A0075A8E4 /* CoreLocationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DF12404618A0075A8E4 /* CoreLocationSession.swift */; };
+		B76B1DF5240468520075A8E4 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DF4240468520075A8E4 /* Photo.swift */; };
+		B76B1DF7240470190075A8E4 /* VenueApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DF6240470190075A8E4 /* VenueApiClient.swift */; };
+		B76B1DFF240475B30075A8E4 /* FourSquareProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DFE240475B30075A8E4 /* FourSquareProjectTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B76B1E01240475B30075A8E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B76B1D3F240072020075A8E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B76B1D46240072020075A8E4;
+			remoteInfo = FourSquareProject;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		B76B1D47240072020075A8E4 /* FourSquareProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FourSquareProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,6 +58,11 @@
 		B76B1DC92403FA060075A8E4 /* FourSquareTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourSquareTabController.swift; sourceTree = "<group>"; };
 		B76B1DCB2403FE7B0075A8E4 /* Venue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 		B76B1DF12404618A0075A8E4 /* CoreLocationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationSession.swift; sourceTree = "<group>"; };
+		B76B1DF4240468520075A8E4 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		B76B1DF6240470190075A8E4 /* VenueApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueApiClient.swift; sourceTree = "<group>"; };
+		B76B1DFC240475B30075A8E4 /* FourSquareProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FourSquareProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B76B1DFE240475B30075A8E4 /* FourSquareProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourSquareProjectTests.swift; sourceTree = "<group>"; };
+		B76B1E00240475B30075A8E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +74,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B76B1DF9240475B30075A8E4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -63,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				B76B1D49240072020075A8E4 /* FourSquareProject */,
+				B76B1DFD240475B30075A8E4 /* FourSquareProjectTests */,
 				B76B1D48240072020075A8E4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -71,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				B76B1D47240072020075A8E4 /* FourSquareProject.app */,
+				B76B1DFC240475B30075A8E4 /* FourSquareProjectTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -127,6 +154,7 @@
 		B76B1D612400751E0075A8E4 /* Networks */ = {
 			isa = PBXGroup;
 			children = (
+				B76B1DF6240470190075A8E4 /* VenueApiClient.swift */,
 			);
 			path = Networks;
 			sourceTree = "<group>";
@@ -135,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				B76B1DCB2403FE7B0075A8E4 /* Venue.swift */,
+				B76B1DF4240468520075A8E4 /* Photo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -145,6 +174,15 @@
 				B76B1DF12404618A0075A8E4 /* CoreLocationSession.swift */,
 			);
 			path = CoreLocation;
+			sourceTree = "<group>";
+		};
+		B76B1DFD240475B30075A8E4 /* FourSquareProjectTests */ = {
+			isa = PBXGroup;
+			children = (
+				B76B1DFE240475B30075A8E4 /* FourSquareProjectTests.swift */,
+				B76B1E00240475B30075A8E4 /* Info.plist */,
+			);
+			path = FourSquareProjectTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,6 +208,24 @@
 			productReference = B76B1D47240072020075A8E4 /* FourSquareProject.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B76B1DFB240475B30075A8E4 /* FourSquareProjectTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B76B1E03240475B30075A8E4 /* Build configuration list for PBXNativeTarget "FourSquareProjectTests" */;
+			buildPhases = (
+				B76B1DF8240475B30075A8E4 /* Sources */,
+				B76B1DF9240475B30075A8E4 /* Frameworks */,
+				B76B1DFA240475B30075A8E4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B76B1E02240475B30075A8E4 /* PBXTargetDependency */,
+			);
+			name = FourSquareProjectTests;
+			productName = FourSquareProjectTests;
+			productReference = B76B1DFC240475B30075A8E4 /* FourSquareProjectTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -182,6 +238,10 @@
 				TargetAttributes = {
 					B76B1D46240072020075A8E4 = {
 						CreatedOnToolsVersion = 11.2;
+					};
+					B76B1DFB240475B30075A8E4 = {
+						CreatedOnToolsVersion = 11.2;
+						TestTargetID = B76B1D46240072020075A8E4;
 					};
 				};
 			};
@@ -202,6 +262,7 @@
 			projectRoot = "";
 			targets = (
 				B76B1D46240072020075A8E4 /* FourSquareProject */,
+				B76B1DFB240475B30075A8E4 /* FourSquareProjectTests */,
 			);
 		};
 /* End PBXProject section */
@@ -213,6 +274,13 @@
 			files = (
 				B76B1D57240072040075A8E4 /* LaunchScreen.storyboard in Resources */,
 				B76B1D54240072040075A8E4 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B76B1DFA240475B30075A8E4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +300,9 @@
 				B76B1D63240076110075A8E4 /* MapViewController.swift in Sources */,
 				B76B1D6B240076790075A8E4 /* ListView.swift in Sources */,
 				B76B1D65240076230075A8E4 /* ListViewController.swift in Sources */,
+				B76B1DF5240468520075A8E4 /* Photo.swift in Sources */,
 				B76B1DCA2403FA060075A8E4 /* FourSquareTabController.swift in Sources */,
+				B76B1DF7240470190075A8E4 /* VenueApiClient.swift in Sources */,
 				B76B1D71240087A00075A8E4 /* DetailViewController.swift in Sources */,
 				B76B1D672400764C0075A8E4 /* SavedViewController.swift in Sources */,
 				B76B1DCC2403FE7B0075A8E4 /* Venue.swift in Sources */,
@@ -240,7 +310,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B76B1DF8240475B30075A8E4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B76B1DFF240475B30075A8E4 /* FourSquareProjectTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B76B1E02240475B30075A8E4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B76B1D46240072020075A8E4 /* FourSquareProject */;
+			targetProxy = B76B1E01240475B30075A8E4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B76B1D55240072040075A8E4 /* LaunchScreen.storyboard */ = {
@@ -404,6 +490,46 @@
 			};
 			name = Release;
 		};
+		B76B1E04240475B30075A8E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WDT827LK75;
+				INFOPLIST_FILE = FourSquareProjectTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Amy.FourSquareProjectTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FourSquareProject.app/FourSquareProject";
+			};
+			name = Debug;
+		};
+		B76B1E05240475B30075A8E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WDT827LK75;
+				INFOPLIST_FILE = FourSquareProjectTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Amy.FourSquareProjectTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FourSquareProject.app/FourSquareProject";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -421,6 +547,15 @@
 			buildConfigurations = (
 				B76B1D5C240072040075A8E4 /* Debug */,
 				B76B1D5D240072040075A8E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B76B1E03240475B30075A8E4 /* Build configuration list for PBXNativeTarget "FourSquareProjectTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B76B1E04240475B30075A8E4 /* Debug */,
+				B76B1E05240475B30075A8E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
