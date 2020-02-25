@@ -11,16 +11,21 @@ import MapKit
 
 class MapView: UIView {
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        searchButton.clipsToBounds = true
+        searchButton.layer.cornerRadius = 13
+    }
     public lazy var venueTextField: UITextField = {
         let textField = UITextField()
-        textField.borderStyle = .line
+        textField.borderStyle = .roundedRect
         textField.backgroundColor = .white
         textField.placeholder = "search by venue"
         return textField
     }()
     public lazy var locationTextField: UITextField = {
        let textField = UITextField()
-        textField.borderStyle = .line
+        textField.borderStyle = .roundedRect
         textField.backgroundColor = .white
         textField.placeholder = "search by location"
         return textField
@@ -76,7 +81,7 @@ class MapView: UIView {
         addSubview(venueTextField)
         venueTextField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            venueTextField.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 40),
+            venueTextField.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
             venueTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             venueTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             venueTextField.heightAnchor.constraint(equalToConstant: 44)

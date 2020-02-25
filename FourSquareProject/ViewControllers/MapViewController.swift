@@ -24,7 +24,11 @@ class MapViewController: UIViewController {
     
     private var isShowingAnnotations = false
     
-    private var annotations = [MKAnnotation]()
+    private var annotations = [MKAnnotation]() {
+        didSet {
+            loadMapView()
+        }
+    }
     
     private let coreLocationSession = CoreLocationSession()
     
@@ -52,8 +56,8 @@ class MapViewController: UIViewController {
         mapView.collectionView.delegate = self
         mapView.venueTextField.delegate = self
         mapView.locationTextField.delegate = self
-        
-        loadVenues(state: "New York", search: "coffee shop")
+        mapView.searchButton.addTarget(self, action: #selector(searchButtonPressed), for: .touchUpInside)
+        //loadVenues(state: "New York", search: "coffee shop")
         mapView.mapKitView.showsUserLocation = true
         
         //listview
@@ -121,9 +125,21 @@ class MapViewController: UIViewController {
         } else {
             view = mapView
             sender.image = UIImage(systemName: "list.bullet")
+            navigationController?.navigationBar.backgroundColor = .clear
         }
     }
     
+    @objc private func searchButtonPressed() {
+        guard let locationText = mapView.locationTextField.text else {
+            return
+        }
+        
+        guard let venueText = mapView.venueTextField.text else {
+            return
+        }
+        
+        loadVenues(state: locationText, search: venueText)
+    }
 }
 
 extension MapViewController: UICollectionViewDataSource {
@@ -149,6 +165,7 @@ extension MapViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension MapViewController: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
