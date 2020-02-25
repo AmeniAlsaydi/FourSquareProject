@@ -11,16 +11,21 @@ import MapKit
 
 class MapView: UIView {
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        searchButton.clipsToBounds = true
+        searchButton.layer.cornerRadius = 13
+    }
     public lazy var venueTextField: UITextField = {
         let textField = UITextField()
-        textField.borderStyle = .line
+        textField.borderStyle = .roundedRect
         textField.backgroundColor = .white
         textField.placeholder = "search by venue"
         return textField
     }()
     public lazy var locationTextField: UITextField = {
        let textField = UITextField()
-        textField.borderStyle = .line
+        textField.borderStyle = .roundedRect
         textField.backgroundColor = .white
         textField.placeholder = "search by location"
         return textField
@@ -36,6 +41,13 @@ class MapView: UIView {
         cv.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
         return cv
     }()
+    public lazy var searchButton: UIButton = {
+       let button = UIButton()
+        button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = .systemBlue
+        return button
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
@@ -49,6 +61,7 @@ class MapView: UIView {
         mapConstraints()
         venueTextConstraints()
         locationTextConstraints()
+        searchButtonConstraints()
         collectionViewConstraints()
     }
     
@@ -68,7 +81,7 @@ class MapView: UIView {
         addSubview(venueTextField)
         venueTextField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            venueTextField.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 40),
+            venueTextField.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
             venueTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             venueTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             venueTextField.heightAnchor.constraint(equalToConstant: 44)
@@ -83,6 +96,17 @@ class MapView: UIView {
             locationTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             locationTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             locationTextField.heightAnchor.constraint(equalToConstant: 44)
+        ])
+    }
+    
+    private func searchButtonConstraints() {
+        addSubview(searchButton)
+        searchButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            searchButton.topAnchor.constraint(equalTo: locationTextField.bottomAnchor, constant: 8),
+            searchButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            searchButton.widthAnchor.constraint(equalToConstant: 44),
+            searchButton.heightAnchor.constraint(equalTo: searchButton.widthAnchor)
         ])
     }
     
