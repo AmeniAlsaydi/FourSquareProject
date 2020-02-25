@@ -44,6 +44,8 @@ class MapViewController: UIViewController {
         
     }
     
+    
+    
     private func configureNavBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Search Venue"
@@ -56,6 +58,7 @@ class MapViewController: UIViewController {
         if isButtonPressed {
             view = listView
             sender.image = UIImage(systemName: "mappin.and.ellipse")
+            navigationController?.navigationBar.backgroundColor = .white
         } else {
             view = mapView
             sender.image = UIImage(systemName: "list.bullet")
