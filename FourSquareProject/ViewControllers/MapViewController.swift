@@ -40,12 +40,12 @@ class MapViewController: UIViewController {
     override func loadView() {
         view = mapView
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureNavBar()
-
+        
         //mapview
         mapView.collectionView.register(MapViewCell.self, forCellWithReuseIdentifier: "mapViewCell")
         mapView.collectionView.dataSource = self
@@ -71,22 +71,22 @@ class MapViewController: UIViewController {
             }
         }
     }
-   
-        private func makeAnnotations() -> [MKPointAnnotation] {
-            var annotations = [MKPointAnnotation]()
-            
-            for venue in venues {
-                let annotation = MKPointAnnotation()
-                let location = CLLocationCoordinate2D(latitude: venue.location.lat, longitude: venue.location.lng)
-                annotation.coordinate = location
-                annotation.title = venue.name
-                annotations.append(annotation)
-            }
-            isShowingAnnotations = true
-            self.annotations = annotations
-            return annotations
+    
+    private func makeAnnotations() -> [MKPointAnnotation] {
+        var annotations = [MKPointAnnotation]()
+        
+        for venue in venues {
+            let annotation = MKPointAnnotation()
+            let location = CLLocationCoordinate2D(latitude: venue.location.lat, longitude: venue.location.lng)
+            annotation.coordinate = location
+            annotation.title = venue.name
+            annotations.append(annotation)
         }
-
+        isShowingAnnotations = true
+        self.annotations = annotations
+        return annotations
+    }
+    
     private func loadMapView() {
         let annotations = makeAnnotations()
         mapView.mapKitView.addAnnotations(annotations)
@@ -123,7 +123,7 @@ class MapViewController: UIViewController {
             sender.image = UIImage(systemName: "list.bullet")
         }
     }
-
+    
 }
 
 extension MapViewController: UICollectionViewDataSource {

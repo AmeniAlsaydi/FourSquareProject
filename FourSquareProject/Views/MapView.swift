@@ -36,6 +36,13 @@ class MapView: UIView {
         cv.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
         return cv
     }()
+    public lazy var searchButton: UIButton = {
+       let button = UIButton()
+        button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = .systemBlue
+        return button
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
@@ -49,6 +56,7 @@ class MapView: UIView {
         mapConstraints()
         venueTextConstraints()
         locationTextConstraints()
+        searchButtonConstraints()
         collectionViewConstraints()
     }
     
@@ -83,6 +91,17 @@ class MapView: UIView {
             locationTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             locationTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             locationTextField.heightAnchor.constraint(equalToConstant: 44)
+        ])
+    }
+    
+    private func searchButtonConstraints() {
+        addSubview(searchButton)
+        searchButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            searchButton.topAnchor.constraint(equalTo: locationTextField.bottomAnchor, constant: 8),
+            searchButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            searchButton.widthAnchor.constraint(equalToConstant: 44),
+            searchButton.heightAnchor.constraint(equalTo: searchButton.widthAnchor)
         ])
     }
     
