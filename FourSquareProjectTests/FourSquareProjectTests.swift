@@ -12,7 +12,7 @@ import XCTest
 
 class FourSquareProjectTests: XCTestCase {
 
-    func testVenueAPIClient() {
+    func testGetVenueAPIClient() {
         let expectedID = "59e9e7c5cf72a01dab3bcc10"
         let searchQuery = "Target"
         let state = "New York"
@@ -32,4 +32,26 @@ class FourSquareProjectTests: XCTestCase {
         }
         wait(for:[exp], timeout: 5.0)
     }
+    
+    func testGetPhotoAPIClient() {
+        
+        let expectedPrefix = "https://fastly.4sqi.net/img/general/"
+        let venueId = "59e9e7c5cf72a01dab3bcc10"
+        
+        let exp = XCTestExpectation(description: "photos found")
+        
+        VenueApiClient.getVenuePhotos(venueID: venueId) { (result) in
+            switch result {
+                case .failure(let appError):
+                    XCTFail("\(appError)")
+                case .success(let photos):
+                    let prefix = photos.first?.prefix
+                    
+                    XCTAssertEqual(prefix, expectedPrefix)
+                    exp.fulfill()
+            }
+        }
+        wait(for:[exp], timeout: 5.0)
+    }
+    
 }

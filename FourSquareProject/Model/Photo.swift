@@ -8,6 +8,19 @@
 
 import Foundation
 
-struct Photo {
-    
+struct PhotoSearch: Codable & Equatable {
+     let response: PhotoResponse
+}
+
+struct PhotoResponse: Codable & Equatable {
+    let photos: Photos
+}
+
+struct Photos: Codable & Equatable {
+    let items: [Photo]
+}
+
+struct Photo: Codable & Equatable { // photo info
+    let prefix: String
+    let suffix: String
 }
