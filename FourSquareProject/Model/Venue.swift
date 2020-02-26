@@ -21,6 +21,7 @@ struct Venue: Codable & Equatable  {
     let id: String
     let name: String
     let location: Location
+    let category: [Category]?
 }
 
 struct Location: Codable & Equatable{
@@ -35,3 +36,15 @@ struct Location: Codable & Equatable{
     let country: String?
     let formattedAddress: [String]
 }
+
+
+struct Category: Codable & Equatable {
+    let name: String
+    let icon: Icon
+}
+
+struct Icon: Codable & Equatable {
+    let prefix: String
+    let suffix: String 
+}
+ 
