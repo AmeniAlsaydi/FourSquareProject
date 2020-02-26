@@ -20,15 +20,21 @@ class MapViewController: UIViewController {
     
     private var isButtonPressed = false
     
-    private var venues = [Venue]()
+    private var venues = [Venue]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.loadMapView()
+                self.mapView.collectionView.reloadData()
+            }
+            
+        }
+    }
     
     private var isShowingAnnotations = false
     
-    private var annotations = [MKAnnotation]() {
-        didSet {
-            loadMapView()
-        }
-    }
+    private var venuePhotos = [Photo]()
+    
+    private var annotations = [MKAnnotation]()
     
     private let coreLocationSession = CoreLocationSession()
     
@@ -74,6 +80,19 @@ class MapViewController: UIViewController {
             case .success(let venues):
                 self.venues = venues
                 self.loadMapView()
+                DispatchQueue.main.async {
+                    self.loadVenuePhotos(venueID: venues.first?.id ?? "")
+                }
+            }
+        }
+    }
+    private func loadVenuePhotos(venueID: String) {
+        VenueApiClient.getVenuePhotos(venueID: venueID) { (result) in
+            switch result {
+            case .failure(let picError):
+                print("error getting venue photos \(picError)")
+            case .success(let photos):
+                self.venuePhotos = photos
             }
         }
     }
@@ -119,7 +138,6 @@ class MapViewController: UIViewController {
     
     @objc private func barButtonPressed(sender: UIBarButtonItem) {
         isButtonPressed.toggle()
-        
         if isButtonPressed {
             view = listView
             sender.image = UIImage(systemName: "mappin.and.ellipse")
@@ -135,18 +153,23 @@ class MapViewController: UIViewController {
         guard let locationText = mapView.locationTextField.text else {
             return
         }
-        
         guard let venueText = mapView.venueTextField.text else {
             return
         }
         
-        loadVenues(state: locationText, search: venueText)
+        if venueText.isEmpty {
+            print("please fill this out")
+        } else {
+            loadVenues(state: locationText, search: venueText)
+            convertPlaceNameToCoordinate(locationText)
+        }
+        
     }
 }
 
 extension MapViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return venues.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -154,6 +177,9 @@ extension MapViewController: UICollectionViewDataSource {
             fatalError("could not cast to mapViewCell")
         }
         cell.backgroundColor = .white
+        let venue = venues[indexPath.row]
+        //let photo = venuePhotos[indexPath.row]
+        cell.configureCell(venue: venue)
         return cell
     }
 }
@@ -167,16 +193,8 @@ extension MapViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension MapViewController: UITextFieldDelegate {
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        
-        guard let searchText = textField.text, !searchText.isEmpty else {
-            return true
-        }
-        
-        convertPlaceNameToCoordinate(searchText)
-        
         return true
     }
 }
@@ -189,7 +207,6 @@ extension MapViewController: MKMapViewDelegate {
         guard let venue = (venues.filter {$0.name == annotation.title}).first else {
             return
         }
-        
         //TODO: present detail view
         let detailVC = DetailViewController()
         

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ImageKit
 
 class MapViewCell: UICollectionViewCell {
     override func layoutSubviews() {
@@ -25,6 +26,7 @@ class MapViewCell: UICollectionViewCell {
     public lazy var venueLabel: UILabel = {
         let label = UILabel()
         label.text = "Venue label"
+        label.numberOfLines = 0
         return label
     }()
     
@@ -61,6 +63,19 @@ class MapViewCell: UICollectionViewCell {
             venueLabel.leadingAnchor.constraint(equalTo: venueImage.trailingAnchor, constant: 8),
             venueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
         ])
+    }
+    public func configureCell(venue: Venue) {
+        venueLabel.text = venue.name
+//        venueImage.getImage(with: "\(photo.prefix)\(photo.suffix)") { (result) in
+//            switch result {
+//            case .failure:
+//                self.venueImage.image = UIImage(systemName: "tortoise.fill")
+//            case .success(let image):
+//                DispatchQueue.main.async {
+//                    self.venueImage.image = image
+//                }
+//            }
+       // }
     }
     
 }
