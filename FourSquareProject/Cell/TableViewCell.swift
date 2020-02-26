@@ -17,8 +17,24 @@ class TableViewCell: UITableViewCell {
     }()
     public lazy var venueLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Times New Roman", size: 30)
+        label.numberOfLines = 0
+        label.font = UIFont(name: "Helvetica", size: 20)
         label.textColor = .systemBlue
+        return label
+    }()
+    public lazy var categoryLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "Helvetica", size: 15)
+        label.text = "testing category"
+        label.textColor = .systemGray
+        return label
+    }()
+    public lazy var addressLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont(name: "Helvetica", size: 15)
+        label.text = "address label is here and it will fit because I made it 0 lines"
+        label.textColor = .systemGray
         return label
     }()
    
@@ -42,15 +58,19 @@ class TableViewCell: UITableViewCell {
                 venueLabel.text = "venue name here"
                 venueImage.translatesAutoresizingMaskIntoConstraints = false
                 venueLabel.translatesAutoresizingMaskIntoConstraints = false
+        categoryLabel.translatesAutoresizingMaskIntoConstraints = false
+        addressLabel.translatesAutoresizingMaskIntoConstraints = false
         
                 imageConstraints()
                 labelConstraints()
+                categoryConstraint()
+                addressConstraint()
     }
     
     private func imageConstraints(){
         addSubview(venueImage)
         NSLayoutConstraint.activate([
-        venueImage.topAnchor.constraint(equalTo: topAnchor, constant: 2),
+        venueImage.topAnchor.constraint(equalTo: topAnchor, constant: 8),
         venueImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
         venueImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
         venueImage.widthAnchor.constraint(equalToConstant: 150)
@@ -61,8 +81,25 @@ class TableViewCell: UITableViewCell {
         addSubview(venueLabel)
         NSLayoutConstraint.activate([
             venueLabel.topAnchor.constraint(equalTo: venueImage.topAnchor),
-            venueLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 2),
+            venueLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             venueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+        ])
+    }
+    
+    private func categoryConstraint(){
+        addSubview(categoryLabel)
+        NSLayoutConstraint.activate([
+            categoryLabel.topAnchor.constraint(equalTo: venueLabel.bottomAnchor, constant: 2),
+            categoryLabel.leadingAnchor.constraint(equalTo: venueLabel.leadingAnchor)
+        ])
+    }
+    
+    private func addressConstraint(){
+        addSubview(addressLabel)
+        NSLayoutConstraint.activate([
+            addressLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 2),
+            addressLabel.leadingAnchor.constraint(equalTo: venueLabel.leadingAnchor),
+            addressLabel.trailingAnchor.constraint(equalTo: venueImage.leadingAnchor, constant: -8)
         ])
     }
 
