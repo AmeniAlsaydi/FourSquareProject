@@ -17,29 +17,43 @@ class TableViewCell: UITableViewCell {
     }()
     public lazy var venueLabel: UILabel = {
         let label = UILabel()
-        label.text = "Venue label"
+        label.font = UIFont(name: "Times New Roman", size: 30)
+        label.textColor = .systemBlue
         return label
     }()
-    
    
-    override func awakeFromNib() {
-    super.awakeFromNib()
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
+    commonInit()
         
-        venueImage.backgroundColor = .systemPink
-        venueLabel.text = "venue name here"
-        venueImage.translatesAutoresizingMaskIntoConstraints = false
-        venueLabel.translatesAutoresizingMaskIntoConstraints = false
+}
+
+
+   required init(coder aDecoder: NSCoder) {
     
-        imageConstraints()
-        labelConstraints()
+    fatalError("init(coder:) has not been implemented")
+    commonInit()
+
+   }
+    
+    private func commonInit(){
+        venueImage.backgroundColor = .systemPink
+                venueLabel.text = "venue name here"
+                venueImage.translatesAutoresizingMaskIntoConstraints = false
+                venueLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+                imageConstraints()
+                labelConstraints()
     }
     
     private func imageConstraints(){
         addSubview(venueImage)
         NSLayoutConstraint.activate([
-        venueImage.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+        venueImage.topAnchor.constraint(equalTo: topAnchor, constant: 2),
         venueImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-        venueImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+        venueImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+        venueImage.widthAnchor.constraint(equalToConstant: 150)
         ])
     }
     
@@ -47,7 +61,7 @@ class TableViewCell: UITableViewCell {
         addSubview(venueLabel)
         NSLayoutConstraint.activate([
             venueLabel.topAnchor.constraint(equalTo: venueImage.topAnchor),
-            venueLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            venueLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 2),
             venueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
         ])
     }

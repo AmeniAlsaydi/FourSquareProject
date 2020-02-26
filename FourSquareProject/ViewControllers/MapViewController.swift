@@ -61,7 +61,9 @@ class MapViewController: UIViewController {
         mapView.mapKitView.showsUserLocation = true
         
         //listview
-        
+        listView.tableView.dataSource = self
+        listView.tableView.register(TableViewCell.self, forCellReuseIdentifier: "tableViewCell")
+        listView.tableView.delegate = self
     }
     
     private func loadVenues(state: String, search: String) {
@@ -212,5 +214,28 @@ extension MapViewController: MKMapViewDelegate {
             mapView.showAnnotations(annotations, animated: true)
         }
         isShowingAnnotations = false
+    }
+}
+
+extension MapViewController: UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        guard let cell = listView.tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as? TableViewCell else {
+            fatalError("could not downcast to tableViewCell")
+        }
+       // cell.textLabel?.text = "hello test cells!"
+        cell.venueLabel.text = "hola!"
+        cell.venueImage.image = UIImage(systemName: "mic")
+        return cell
+    }
+}
+
+extension MapViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
 }
