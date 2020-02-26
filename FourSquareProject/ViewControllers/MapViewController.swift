@@ -80,11 +80,9 @@ class MapViewController: UIViewController {
                 print("error getting data from api \(appError)")
             case .success(let venues):
                 self.venues = venues
-                self.loadMapView()
                 DispatchQueue.main.async {
                     for venue in venues {
                         self.loadVenuePhotos(venueID: venue.id)
-
                     }
                 }
             }
