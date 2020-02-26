@@ -24,6 +24,7 @@ class MapViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.loadMapView()
+                self.mapView.collectionView.reloadData()
             }
             
         }
@@ -80,24 +81,24 @@ class MapViewController: UIViewController {
                 print("error getting data from api \(appError)")
             case .success(let venues):
                 self.venues = venues
-                DispatchQueue.main.async {
-                    for venue in venues {
-                        self.loadVenuePhotos(venueID: venue.id)
-                    }
-                }
+//                DispatchQueue.main.async {
+//                    for venue in venues {
+//                        self.loadVenuePhotos(venueID: venue.id)
+//                    }
+//                }
             }
         }
     }
-    private func loadVenuePhotos(venueID: String) {
-        VenueApiClient.getVenuePhotos(venueID: venueID) { (result) in
-            switch result {
-            case .failure(let picError):
-                print("error getting venue photos \(picError)")
-            case .success(let photos):
-                self.venuePhotos = photos
-            }
-        }
-    }
+//    private func loadVenuePhotos(venueID: String) {
+//        VenueApiClient.getVenuePhotos(venueID: venueID) { (result) in
+//            switch result {
+//            case .failure(let picError):
+//                print("error getting venue photos \(picError)")
+//            case .success(let photos):
+//                self.venuePhotos = photos
+//            }
+//        }
+//    }
     
     private func makeAnnotations() -> [MKPointAnnotation] {
         var annotations = [MKPointAnnotation]()
@@ -180,8 +181,8 @@ extension MapViewController: UICollectionViewDataSource {
         }
         cell.backgroundColor = .white
         let venue = venues[indexPath.row]
-        let photo = venuePhotos[indexPath.row]
-        cell.configureCell(venue: venue, photo: photo)
+        //let photo = venuePhotos[indexPath.row]
+        cell.configureCell(venue: venue)
         return cell
     }
 }
