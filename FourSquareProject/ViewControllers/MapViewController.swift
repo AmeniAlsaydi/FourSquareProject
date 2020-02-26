@@ -24,18 +24,20 @@ class MapViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.loadMapView()
-                self.mapView.collectionView.reloadData()
             }
             
         }
     }
+    private var venuePhotos = [Photo]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.mapView.collectionView.reloadData()
+            }
+        }
+    }
     
     private var isShowingAnnotations = false
-    
-    private var venuePhotos = [Photo]()
-    
     private var annotations = [MKAnnotation]()
-    
     private let coreLocationSession = CoreLocationSession()
     
     init(_ dataPersistance: DataPersistence<Venue>) {
@@ -63,7 +65,6 @@ class MapViewController: UIViewController {
         mapView.venueTextField.delegate = self
         mapView.locationTextField.delegate = self
         mapView.searchButton.addTarget(self, action: #selector(searchButtonPressed), for: .touchUpInside)
-        //loadVenues(state: "New York", search: "coffee shop")
         mapView.mapKitView.showsUserLocation = true
         
         //listview
@@ -81,7 +82,10 @@ class MapViewController: UIViewController {
                 self.venues = venues
                 self.loadMapView()
                 DispatchQueue.main.async {
-                    self.loadVenuePhotos(venueID: venues.first?.id ?? "")
+                    for venue in venues {
+                        self.loadVenuePhotos(venueID: venue.id)
+
+                    }
                 }
             }
         }
@@ -178,8 +182,8 @@ extension MapViewController: UICollectionViewDataSource {
         }
         cell.backgroundColor = .white
         let venue = venues[indexPath.row]
-        //let photo = venuePhotos[indexPath.row]
-        cell.configureCell(venue: venue)
+        let photo = venuePhotos[indexPath.row]
+        cell.configureCell(venue: venue, photo: photo)
         return cell
     }
 }
