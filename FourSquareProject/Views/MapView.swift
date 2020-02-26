@@ -38,7 +38,7 @@ class MapView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        cv.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+        cv.backgroundColor = .clear
         return cv
     }()
     public lazy var searchButton: UIButton = {
