@@ -64,18 +64,31 @@ class MapViewCell: UICollectionViewCell {
             venueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
         ])
     }
-    public func configureCell(venue: Venue, photo: Photo) {
+    public func configureCell(venue: Venue) {
         venueLabel.text = venue.name
-        venueImage.getImage(with: "\(photo.prefix)original\(photo.suffix)") { (result) in
+        VenueApiClient.getVenuePhotos(venueID: venue.id) { (result) in
             switch result {
             case .failure:
-                self.venueImage.image = UIImage(systemName: "tortoise.fill")
-            case .success(let image):
+                print("ew no image")
+            case .success(let photos):
+                let prefix = photos.first?.prefix ?? ""
+                let suffix = photos.first?.suffix ?? ""
+                let venuePhotos = "\(prefix)original\(suffix)"
                 DispatchQueue.main.async {
-                    self.venueImage.image = image
+                    self.venueImage.getImage(with: venuePhotos) { (result) in
+                        switch result {
+                        case .failure:
+                            self.venueImage.image = UIImage(systemName: "tortoise.fill")
+                        case .success(let image):
+                            DispatchQueue.main.async {
+                                self.venueImage.image = image
+                            }
+                        }
+                    }
                 }
             }
         }
+        
     }
     
 }
