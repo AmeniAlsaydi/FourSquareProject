@@ -14,7 +14,7 @@ class SavedViewController: UIViewController {
     
     private var savedView = SavedView()
     
-    private var savedVenueCategories = ["Favorite Places", "test"] {
+    private var savedVenueCategories = ["Favorite Places"] {
         didSet {
             savedView.collectionView.reloadData()
         }
@@ -73,6 +73,15 @@ extension SavedViewController: UICollectionViewDataSource {
         cell.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let category = savedVenueCategories[indexPath.row]
+        
+        let savedCollectionVC = SavedCollectionViewController()
+        savedCollectionVC.category = category
+        
+        navigationController?.pushViewController(savedCollectionVC, animated: true)
     }
     
     
