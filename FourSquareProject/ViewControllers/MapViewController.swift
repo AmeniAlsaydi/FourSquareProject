@@ -185,6 +185,15 @@ extension MapViewController: UICollectionViewDataSource {
         cell.configureCell(venue: venue)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+         let selectedVenue = venues[indexPath.row]
+              // let selectedPhoto = venuePhotos[indexPath.row]
+             //  let detailedVC = DetailViewController(datapersistance, venue: selectedVenue, photo: selectedPhoto)
+             //  navigationController?.pushViewController(detailedVC, animated: true)
+    }
+    
+    
 }
 extension MapViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -211,7 +220,6 @@ extension MapViewController: MKMapViewDelegate {
             return
         }
         //TODO: present detail view
-        //     let detailVC = DetailViewController()
         
     }
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -255,6 +263,13 @@ extension MapViewController: UITableViewDataSource{
         //        cell.venueImage.image = UIImage(systemName: "mic")
         cell.configureTableViewCell(venue: venue)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedVenue = venues[indexPath.row]
+       // let selectedPhoto = venuePhotos[indexPath.row]
+      //  let detailedVC = DetailViewController(datapersistance, venue: selectedVenue, photo: selectedPhoto)
+      //  navigationController?.pushViewController(detailedVC, animated: true)
     }
 }
 
