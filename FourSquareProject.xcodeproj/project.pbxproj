@@ -65,7 +65,7 @@
 		B76B1DFC240475B30075A8E4 /* FourSquareProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FourSquareProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B76B1DFE240475B30075A8E4 /* FourSquareProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourSquareProjectTests.swift; sourceTree = "<group>"; };
 		B76B1E00240475B30075A8E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B76B1E3F240857710075A8E4 /* OptionsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OptionsMenuView.swift; path = FourSquareProject/Views/OptionsMenuView.swift; sourceTree = "<group>"; };
+		B76B1E3F240857710075A8E4 /* OptionsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsMenuView.swift; sourceTree = "<group>"; };
 		C6C74FA62404802200CF5629 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,7 +100,6 @@
 		B76B1D3E240072020075A8E4 = {
 			isa = PBXGroup;
 			children = (
-				B76B1E3F240857710075A8E4 /* OptionsMenuView.swift */,
 				B76B1D49240072020075A8E4 /* FourSquareProject */,
 				B76B1DFD240475B30075A8E4 /* FourSquareProjectTests */,
 				B76B1D48240072020075A8E4 /* Products */,
@@ -149,6 +148,7 @@
 				B76B1D6A240076790075A8E4 /* ListView.swift */,
 				B76B1D6C240086F00075A8E4 /* SavedView.swift */,
 				B76B1D6E240087690075A8E4 /* DetailView.swift */,
+				B76B1E3F240857710075A8E4 /* OptionsMenuView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
