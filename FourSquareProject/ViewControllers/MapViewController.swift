@@ -186,6 +186,13 @@ extension MapViewController: UICollectionViewDataSource {
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+         let selectedVenue = venues[indexPath.row]
+              // let selectedPhoto = venuePhotos[indexPath.row]
+             //  let detailedVC = DetailViewController(datapersistance, venue: selectedVenue, photo: selectedPhoto)
+             //  navigationController?.pushViewController(detailedVC, animated: true)
+    }
+    
     
 }
 extension MapViewController: UICollectionViewDelegateFlowLayout {
@@ -260,9 +267,9 @@ extension MapViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedVenue = venues[indexPath.row]
-        let selectedPhoto = venuePhotos[indexPath.row]
-        let detailedVC = DetailViewController(datapersistance, venue: selectedVenue, photo: selectedPhoto)
-        navigationController?.pushViewController(detailedVC, animated: true)
+       // let selectedPhoto = venuePhotos[indexPath.row]
+      //  let detailedVC = DetailViewController(datapersistance, venue: selectedVenue, photo: selectedPhoto)
+      //  navigationController?.pushViewController(detailedVC, animated: true)
     }
 }
 
