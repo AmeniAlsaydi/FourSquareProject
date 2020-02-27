@@ -59,7 +59,11 @@ class DetailViewController: UIViewController {
         
         detailView.categoryLabel.text = venue.categories.first?.name
         
-        let iconUrl = ""
+        guard let iconPrefix = venue.categories.first?.icon.prefix, let iconSuffix = venue.categories.first?.icon.suffix else {
+            return 
+        }
+        
+        let iconUrl = "\(iconPrefix)64\(iconSuffix)"
         
         detailView.categoryIcon.getImage(with: iconUrl) { [weak self] (result) in
             switch result {

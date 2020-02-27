@@ -78,6 +78,8 @@ class DetailView: UIView {
     
     public lazy var categoryIcon: UIImageView = {
         let iv = UIImageView()
+        iv.clipsToBounds = true
+        iv.layer.cornerRadius = 10 
         iv.image = UIImage(systemName: "mappin.and.ellipse")
         iv.tintColor = .black
         return iv
