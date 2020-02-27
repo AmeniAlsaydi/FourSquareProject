@@ -102,5 +102,34 @@ class TableViewCell: UITableViewCell {
             addressLabel.trailingAnchor.constraint(equalTo: venueImage.leadingAnchor, constant: -8)
         ])
     }
+    
+    public func configureTableViewCell(venue: Venue) {
+        venueLabel.text = venue.name
+        addressLabel.text = venue.location.address
+        categoryLabel.text = "\(venue.categories[0].name)"
+        VenueApiClient.getVenuePhotos(venueID: venue.id) { (result) in
+            switch result {
+            case .failure:
+                print("ew no image")
+            case .success(let photos):
+                let prefix = photos.first?.prefix ?? ""
+                let suffix = photos.first?.suffix ?? ""
+                let venuePhotos = "\(prefix)original\(suffix)"
+                DispatchQueue.main.async {
+                    self.venueImage.getImage(with: venuePhotos) { (result) in
+                        switch result {
+                        case .failure:
+                            self.venueImage.image = UIImage(systemName: "tortoise.fill")
+                        case .success(let image):
+                            DispatchQueue.main.async {
+                                self.venueImage.image = image
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
 
 }

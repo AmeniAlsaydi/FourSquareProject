@@ -211,7 +211,7 @@ extension MapViewController: MKMapViewDelegate {
             return
         }
         //TODO: present detail view
-        let detailVC = DetailViewController()
+   //     let detailVC = DetailViewController()
         
     }
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -247,9 +247,12 @@ extension MapViewController: UITableViewDataSource{
         guard let cell = listView.tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as? TableViewCell else {
             fatalError("could not downcast to tableViewCell")
         }
+        
+        let venue = venues[indexPath.row]
        // cell.textLabel?.text = "hello test cells!"
-        cell.venueLabel.text = "hola!"
-        cell.venueImage.image = UIImage(systemName: "mic")
+//        cell.venueLabel.text = "hola!"
+//        cell.venueImage.image = UIImage(systemName: "mic")
+        cell.configureTableViewCell(venue: venue)
         return cell
     }
 }
