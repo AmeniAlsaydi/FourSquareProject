@@ -82,7 +82,7 @@ class TableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             venueLabel.topAnchor.constraint(equalTo: venueImage.topAnchor),
             venueLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            venueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+            venueLabel.trailingAnchor.constraint(equalTo: venueImage.leadingAnchor, constant: -8)
         ])
     }
     
