@@ -9,6 +9,7 @@
 import UIKit
 import DataPersistence
 import ImageKit
+import MapKit
 
 class DetailViewController: UIViewController {
     
@@ -17,6 +18,7 @@ class DetailViewController: UIViewController {
     private var photo: Photo
     
     private let detailView = DetailView()
+    private var locationSession = CoreLocationSession()
     
     init(_ dataPersistance: DataPersistence<Venue>, venue: Venue, photo: Photo) {
         self.datapersistance = dataPersistance
@@ -48,21 +50,30 @@ class DetailViewController: UIViewController {
         print("Bar button pressed")
     }
     
+    private func loadVenueAnnoatation(venue: Venue) {
+        let annotation = MKPointAnnotation()
+        annotation.title = venue.name
+        let lat = venue.location.lat
+        let lng = venue.location.lng
+        annotation.coordinate = CLLocationCoordinate2D(latitude: lat , longitude: lng)
+        detailView.mapKitView.addAnnotations([annotation])
+        detailView.mapKitView.showAnnotations([annotation], animated: true)
+        
+    }
     
     private func updateUI() {
-        
+        // venue name
         detailView.venueNameLabel.text = venue.name
         
+        // venue address
         let address = "\(venue.location.formattedAddress[0]) \n\(venue.location.formattedAddress[1]) \n\(venue.location.formattedAddress[2])"
-        
         detailView.addressLabel.text = address
         
+        // venue categories
         detailView.categoryLabel.text = venue.categories.first?.name
-        
         guard let iconPrefix = venue.categories.first?.icon.prefix, let iconSuffix = venue.categories.first?.icon.suffix else {
             return 
         }
-        
         let iconUrl = "\(iconPrefix)64\(iconSuffix)"
         
         detailView.categoryIcon.getImage(with: iconUrl) { [weak self] (result) in
@@ -76,6 +87,7 @@ class DetailViewController: UIViewController {
             }
         }
         
+        // venue photo
         let prefix = photo.prefix
         let suffix = photo.suffix
         let imageUrl = "\(prefix)original\(suffix)"
@@ -95,6 +107,10 @@ class DetailViewController: UIViewController {
                 }
             }
         }
+        
+        // venue annotation on map
+        
+        loadVenueAnnoatation(venue: venue)
     }
     
 }
