@@ -1,20 +1,20 @@
 //
-//  SavedView.swift
+//  SavedCollectionView.swift
 //  FourSquareProject
 //
-//  Created by Amy Alsaydi on 2/21/20.
+//  Created by casandra grullon on 2/27/20.
 //  Copyright © 2020 Amy Alsaydi. All rights reserved.
 //
 
 import UIKit
 
-class SavedView: UIView {
+class SavedCollectionView: UIView {
     
     public var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        cv.backgroundColor = .clear
+        cv.backgroundColor = .white
         return cv
     }()
     
@@ -41,4 +41,5 @@ class SavedView: UIView {
             collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
     }
+    
 }
