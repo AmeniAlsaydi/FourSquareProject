@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1305770A24048AC000763957 /* MapViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1305770924048AC000763957 /* MapViewCell.swift */; };
-		13F57B0E2405825100012B1D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F57B0D2405825100012B1D /* TableViewCell.swift */; };
 		B76B1D4B240072020075A8E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D4A240072020075A8E4 /* AppDelegate.swift */; };
 		B76B1D4D240072020075A8E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D4C240072020075A8E4 /* SceneDelegate.swift */; };
 		B76B1D54240072040075A8E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B76B1D53240072040075A8E4 /* Assets.xcassets */; };
@@ -28,6 +26,8 @@
 		B76B1DF7240470190075A8E4 /* VenueApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DF6240470190075A8E4 /* VenueApiClient.swift */; };
 		B76B1DFF240475B30075A8E4 /* FourSquareProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DFE240475B30075A8E4 /* FourSquareProjectTests.swift */; };
 		B76B1E40240857710075A8E4 /* OptionsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1E3F240857710075A8E4 /* OptionsMenuView.swift */; };
+		B76B1E4424085AF60075A8E4 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1E4224085AF60075A8E4 /* TableViewCell.swift */; };
+		B76B1E4524085AF60075A8E4 /* MapViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1E4324085AF60075A8E4 /* MapViewCell.swift */; };
 		C6C74FA72404802200CF5629 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C74FA62404802200CF5629 /* Config.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,8 +42,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1305770924048AC000763957 /* MapViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewCell.swift; path = FourSquareProject/Cells/MapViewCell.swift; sourceTree = SOURCE_ROOT; };
-		13F57B0D2405825100012B1D /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		B76B1D47240072020075A8E4 /* FourSquareProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FourSquareProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B76B1D4A240072020075A8E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B76B1D4C240072020075A8E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +64,8 @@
 		B76B1DFE240475B30075A8E4 /* FourSquareProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourSquareProjectTests.swift; sourceTree = "<group>"; };
 		B76B1E00240475B30075A8E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B76B1E3F240857710075A8E4 /* OptionsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsMenuView.swift; sourceTree = "<group>"; };
+		B76B1E4224085AF60075A8E4 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewCell.swift; path = FourSquareProject/TableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		B76B1E4324085AF60075A8E4 /* MapViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewCell.swift; path = FourSquareProject/MapViewCell.swift; sourceTree = SOURCE_ROOT; };
 		C6C74FA62404802200CF5629 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,15 +88,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1305770B24048ACC00763957 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				1305770924048AC000763957 /* MapViewCell.swift */,
-				13F57B0D2405825100012B1D /* TableViewCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
 		B76B1D3E240072020075A8E4 = {
 			isa = PBXGroup;
 			children = (
@@ -118,7 +109,7 @@
 		B76B1D49240072020075A8E4 /* FourSquareProject */ = {
 			isa = PBXGroup;
 			children = (
-				1305770B24048ACC00763957 /* Cell */,
+				B76B1E4124085AAE0075A8E4 /* CellViews */,
 				B76B1DF3240461980075A8E4 /* CoreLocation */,
 				B76B1D60240074FE0075A8E4 /* SupportingFiles */,
 				B76B1D5F240074F00075A8E4 /* Views */,
@@ -197,6 +188,15 @@
 				B76B1E00240475B30075A8E4 /* Info.plist */,
 			);
 			path = FourSquareProjectTests;
+			sourceTree = "<group>";
+		};
+		B76B1E4124085AAE0075A8E4 /* CellViews */ = {
+			isa = PBXGroup;
+			children = (
+				B76B1E4324085AF60075A8E4 /* MapViewCell.swift */,
+				B76B1E4224085AF60075A8E4 /* TableViewCell.swift */,
+			);
+			path = CellViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -308,8 +308,8 @@
 				B76B1E40240857710075A8E4 /* OptionsMenuView.swift in Sources */,
 				B76B1D6D240086F00075A8E4 /* SavedView.swift in Sources */,
 				B76B1D6F240087690075A8E4 /* DetailView.swift in Sources */,
+				B76B1E4524085AF60075A8E4 /* MapViewCell.swift in Sources */,
 				B76B1DF22404618A0075A8E4 /* CoreLocationSession.swift in Sources */,
-				13F57B0E2405825100012B1D /* TableViewCell.swift in Sources */,
 				B76B1D4B240072020075A8E4 /* AppDelegate.swift in Sources */,
 				C6C74FA72404802200CF5629 /* Config.swift in Sources */,
 				B76B1D692400766E0075A8E4 /* MapView.swift in Sources */,
@@ -319,8 +319,8 @@
 				B76B1DCA2403FA060075A8E4 /* FourSquareTabController.swift in Sources */,
 				B76B1DF7240470190075A8E4 /* VenueApiClient.swift in Sources */,
 				B76B1D71240087A00075A8E4 /* DetailViewController.swift in Sources */,
-				1305770A24048AC000763957 /* MapViewCell.swift in Sources */,
 				B76B1D672400764C0075A8E4 /* SavedViewController.swift in Sources */,
+				B76B1E4424085AF60075A8E4 /* TableViewCell.swift in Sources */,
 				B76B1DCC2403FE7B0075A8E4 /* Venue.swift in Sources */,
 				B76B1D4D240072020075A8E4 /* SceneDelegate.swift in Sources */,
 			);
