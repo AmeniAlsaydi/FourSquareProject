@@ -211,7 +211,7 @@ extension MapViewController: MKMapViewDelegate {
             return
         }
         //TODO: present detail view
-        let detailVC = DetailViewController()
+        //let detailVC = DetailViewController()
         
     }
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
