@@ -14,7 +14,11 @@ class SavedViewController: UIViewController {
     
     private var savedView = SavedView()
     
-    private var savedVenues = [String]()
+    private var savedVenueCategories = ["Favorite Places", "test"] {
+        didSet {
+            savedView.collectionView.reloadData()
+        }
+    }
     
     override func loadView() {
         view = savedView
@@ -31,7 +35,7 @@ class SavedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        savedView.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Saved Venues"
         savedView.collectionView.dataSource = self
@@ -43,23 +47,30 @@ class SavedViewController: UIViewController {
 }
 extension SavedViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-           let maxsize: CGSize = UIScreen.main.bounds.size
-           let itemWidth: CGFloat = maxsize.width
-           let itemHeight: CGFloat = maxsize.height * 0.20
-           return CGSize(width: itemWidth, height: itemHeight)
-       }
+        let itemSpacing: CGFloat = 10
+        let maxSize: CGFloat = UIScreen.main.bounds.size.width
+        let numberOfItems: CGFloat = 2
+        let totalSpace: CGFloat = numberOfItems * itemSpacing
+        let itemWidth: CGFloat = (maxSize - totalSpace) / numberOfItems
+        return CGSize(width: itemWidth, height: itemWidth)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
+    }
 }
 extension SavedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return savedVenueCategories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = savedView.collectionView.dequeueReusableCell(withReuseIdentifier: "savedCell", for: indexPath) as? SavedCell else {
             fatalError("could not cast to SavedCell")
         }
-        let saved = savedVenues[indexPath.row]
+        let saved = savedVenueCategories[indexPath.row]
         cell.collectionLabel.text = saved
+        
+        cell.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
         
         return cell
     }
