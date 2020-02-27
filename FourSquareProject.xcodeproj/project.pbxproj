@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1305770A24048AC000763957 /* MapViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1305770924048AC000763957 /* MapViewCell.swift */; };
+		137482FF24085F4F00531FCD /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137482FE24085F4F00531FCD /* ListViewController.swift */; };
+		1374830124085FF400531FCD /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1374830024085FF400531FCD /* ListView.swift */; };
 		13F57B0E2405825100012B1D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F57B0D2405825100012B1D /* TableViewCell.swift */; };
 		B76B1D4B240072020075A8E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D4A240072020075A8E4 /* AppDelegate.swift */; };
 		B76B1D4D240072020075A8E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D4C240072020075A8E4 /* SceneDelegate.swift */; };
@@ -16,7 +18,6 @@
 		B76B1D63240076110075A8E4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D62240076110075A8E4 /* MapViewController.swift */; };
 		B76B1D672400764C0075A8E4 /* SavedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D662400764C0075A8E4 /* SavedViewController.swift */; };
 		B76B1D692400766E0075A8E4 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D682400766E0075A8E4 /* MapView.swift */; };
-		B76B1D6B240076790075A8E4 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D6A240076790075A8E4 /* ListView.swift */; };
 		B76B1D6D240086F00075A8E4 /* SavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D6C240086F00075A8E4 /* SavedView.swift */; };
 		B76B1D6F240087690075A8E4 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D6E240087690075A8E4 /* DetailView.swift */; };
 		B76B1D71240087A00075A8E4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D70240087A00075A8E4 /* DetailViewController.swift */; };
@@ -43,6 +44,8 @@
 
 /* Begin PBXFileReference section */
 		1305770924048AC000763957 /* MapViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewCell.swift; path = FourSquareProject/Cells/MapViewCell.swift; sourceTree = SOURCE_ROOT; };
+		137482FE24085F4F00531FCD /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		1374830024085FF400531FCD /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		13F57B0D2405825100012B1D /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		B76B1D47240072020075A8E4 /* FourSquareProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FourSquareProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B76B1D4A240072020075A8E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -53,7 +56,6 @@
 		B76B1D62240076110075A8E4 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B76B1D662400764C0075A8E4 /* SavedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedViewController.swift; sourceTree = "<group>"; };
 		B76B1D682400766E0075A8E4 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
-		B76B1D6A240076790075A8E4 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		B76B1D6C240086F00075A8E4 /* SavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedView.swift; sourceTree = "<group>"; };
 		B76B1D6E240087690075A8E4 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		B76B1D70240087A00075A8E4 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			children = (
 				B76B1DC92403FA060075A8E4 /* FourSquareTabController.swift */,
 				B76B1D62240076110075A8E4 /* MapViewController.swift */,
+				137482FE24085F4F00531FCD /* ListViewController.swift */,
 				B76B1D70240087A00075A8E4 /* DetailViewController.swift */,
 				B76B1D662400764C0075A8E4 /* SavedViewController.swift */,
 			);
@@ -146,7 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				B76B1D682400766E0075A8E4 /* MapView.swift */,
-				B76B1D6A240076790075A8E4 /* ListView.swift */,
+				1374830024085FF400531FCD /* ListView.swift */,
 				B76B1D6C240086F00075A8E4 /* SavedView.swift */,
 				B76B1D6E240087690075A8E4 /* DetailView.swift */,
 			);
@@ -314,14 +317,15 @@
 				C6C74FA72404802200CF5629 /* Config.swift in Sources */,
 				B76B1D692400766E0075A8E4 /* MapView.swift in Sources */,
 				B76B1D63240076110075A8E4 /* MapViewController.swift in Sources */,
-				B76B1D6B240076790075A8E4 /* ListView.swift in Sources */,
 				B76B1DF5240468520075A8E4 /* Photo.swift in Sources */,
 				B76B1DCA2403FA060075A8E4 /* FourSquareTabController.swift in Sources */,
+				1374830124085FF400531FCD /* ListView.swift in Sources */,
 				B76B1DF7240470190075A8E4 /* VenueApiClient.swift in Sources */,
 				B76B1D71240087A00075A8E4 /* DetailViewController.swift in Sources */,
 				1305770A24048AC000763957 /* MapViewCell.swift in Sources */,
 				B76B1D672400764C0075A8E4 /* SavedViewController.swift in Sources */,
 				B76B1DCC2403FE7B0075A8E4 /* Venue.swift in Sources */,
+				137482FF24085F4F00531FCD /* ListViewController.swift in Sources */,
 				B76B1D4D240072020075A8E4 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

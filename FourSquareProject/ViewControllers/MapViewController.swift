@@ -81,24 +81,24 @@ class MapViewController: UIViewController {
                 print("error getting data from api \(appError)")
             case .success(let venues):
                 self.venues = venues
-//                DispatchQueue.main.async {
-//                    for venue in venues {
-//                        self.loadVenuePhotos(venueID: venue.id)
-//                    }
-//                }
+                //                DispatchQueue.main.async {
+                //                    for venue in venues {
+                //                        self.loadVenuePhotos(venueID: venue.id)
+                //                    }
+                //                }
             }
         }
     }
-//    private func loadVenuePhotos(venueID: String) {
-//        VenueApiClient.getVenuePhotos(venueID: venueID) { (result) in
-//            switch result {
-//            case .failure(let picError):
-//                print("error getting venue photos \(picError)")
-//            case .success(let photos):
-//                self.venuePhotos = photos
-//            }
-//        }
-//    }
+    //    private func loadVenuePhotos(venueID: String) {
+    //        VenueApiClient.getVenuePhotos(venueID: venueID) { (result) in
+    //            switch result {
+    //            case .failure(let picError):
+    //                print("error getting venue photos \(picError)")
+    //            case .success(let photos):
+    //                self.venuePhotos = photos
+    //            }
+    //        }
+    //    }
     
     private func makeAnnotations() -> [MKPointAnnotation] {
         var annotations = [MKPointAnnotation]()
@@ -211,7 +211,7 @@ extension MapViewController: MKMapViewDelegate {
             return
         }
         //TODO: present detail view
-   //     let detailVC = DetailViewController()
+        //     let detailVC = DetailViewController()
         
     }
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -239,19 +239,20 @@ extension MapViewController: MKMapViewDelegate {
 
 extension MapViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        
+        venues.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         guard let cell = listView.tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as? TableViewCell else {
             fatalError("could not downcast to tableViewCell")
         }
         
         let venue = venues[indexPath.row]
-       // cell.textLabel?.text = "hello test cells!"
-//        cell.venueLabel.text = "hola!"
-//        cell.venueImage.image = UIImage(systemName: "mic")
+        // cell.textLabel?.text = "hello test cells!"
+        //        cell.venueLabel.text = "hola!"
+        //        cell.venueImage.image = UIImage(systemName: "mic")
         cell.configureTableViewCell(venue: venue)
         return cell
     }

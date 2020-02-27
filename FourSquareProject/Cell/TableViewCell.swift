@@ -107,6 +107,7 @@ class TableViewCell: UITableViewCell {
         venueLabel.text = venue.name
         addressLabel.text = venue.location.address
         categoryLabel.text = "\(venue.categories[0].name)"
+       
         VenueApiClient.getVenuePhotos(venueID: venue.id) { (result) in
             switch result {
             case .failure:
