@@ -2,45 +2,51 @@
 //  DetailView.swift
 //  FourSquareProject
 //
-//  Created by Amy Alsaydi on 2/21/20.
+//  Created by Amy Alsaydi on 2/25/20.
 //  Copyright © 2020 Amy Alsaydi. All rights reserved.
 //
 
 import UIKit
+import MapKit
 
 class DetailView: UIView {
     
-    private lazy var scrollView: UIScrollView = {
+    public lazy var scrollView: UIScrollView = {
         let scrollview = UIScrollView()
-        scrollview.backgroundColor = .white
-        scrollview.frame = self.bounds
+        scrollview.backgroundColor = .clear
         return scrollview
     }()
     
-    private lazy var contentView: UIView = {
+    public lazy var contentView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .clear
         return view
        }()
     
-    private lazy var backgroundImage: UIImageView = {
+    public lazy var backgroundImage: UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFill
+        iv.image = UIImage(named: "targetImage")
+        iv.clipsToBounds = true
+        iv.alpha = 1
+        return iv
+    }()
+    
+    
+    public lazy var blur: UIVisualEffectView = {
+       let blur = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.extraLight))
+       return blur
+    }()
+    
+    public lazy var venueImage: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "targetImage")
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-        iv.alpha = 0.5
         return iv
     }()
     
-    private lazy var venueImage: UIImageView = {
-        let iv = UIImageView()
-        iv.image = UIImage(named: "targetImage")
-        iv.contentMode = .scaleAspectFill
-        iv.clipsToBounds = true
-        return iv
-    }()
-    
-    private lazy var venueNameLabel: UILabel = {
+    public lazy var venueNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Target"
         label.numberOfLines = 0
@@ -48,28 +54,63 @@ class DetailView: UIView {
         return label
     }()
     
-    private lazy var locationIcon: UIImageView = {
+    public lazy var locationIcon: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(systemName: "mappin.and.ellipse")
         iv.tintColor = .black
         return iv
     }()
     
-    private lazy var addressLabel: UILabel = {
+    public lazy var addressLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.monospacedDigitSystemFont(ofSize: 14, weight: .light)
+        label.text = "No Address"
+        return label
+    }()
+    
+    public lazy var categoryTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Category"
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        return label
+    }()
+    
+    public lazy var categoryIcon: UIImageView = {
+        let iv = UIImageView()
+        iv.image = UIImage(systemName: "mappin.and.ellipse")
+        iv.tintColor = .black
+        return iv
+    }()
+    
+    public lazy var categoryLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.monospacedDigitSystemFont(ofSize: 14, weight: .light)
         label.text = """
-        139 Flatbush Ave (at Atlantic Ave)
-        Brooklyn, NY 11217,
-        United States
+        No Category
+        blah blah blah
 """
         return label
     }()
-    private lazy var venueDescription: UILabel = {
+    
+    public lazy var locationTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Location"
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        return label
+    }()
+    
+    public lazy var mapKitView: MKMapView = {
+        let map = MKMapView()
+        return map
+    }()
+    
+    public lazy var venueDescription: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tellus lorem, pretium ac tellus placerat, maximus tincidunt magna. Maecenas porttitor diam at facilisis ultrices. Pellentesque at accumsan magna, sit amet semper dolor. Sed porttitor blandit eros, quis mattis nunc dictum sed. Integer accumsan accumsan tortor ac ultrices. Nullam imperdiet arcu non lorem luctus vestibulum. Donec ut arcu tellus. In finibus, mauris ut posuere auctor, erat enim vulputit at."
+        label.text = ""
         return label
     }()
 
@@ -88,10 +129,18 @@ class DetailView: UIView {
         scrollViewContraints()
         contentViewContraints()
         backgroundImageContraints()
+        blurContraints()
         venueImageContraints()
         venueNameConstraints()
         locationIconConstraints()
         addressConstraints()
+        categorytitleConstraints()
+        categoryIconConstraints()
+        cateoryConstraints()
+        locationTitleConstraints()
+        
+        mapConstraints()
+        
         venueDesConstraints()
     }
     
@@ -106,7 +155,7 @@ class DetailView: UIView {
             scrollView.topAnchor.constraint(equalTo: topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            //scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
             scrollView.widthAnchor.constraint(equalToConstant: width),
             scrollView.heightAnchor.constraint(equalToConstant: height)
         ])
@@ -126,6 +175,7 @@ class DetailView: UIView {
     }
     
     private func backgroundImageContraints() {
+        
         contentView.addSubview(backgroundImage)
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
         
@@ -137,15 +187,29 @@ class DetailView: UIView {
         ])
     }
     
+    
+    private func blurContraints() {
+        
+        backgroundImage.addSubview(blur)
+        blur.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+        blur.topAnchor.constraint(equalTo: backgroundImage.topAnchor),
+        blur.leadingAnchor.constraint(equalTo: backgroundImage.leadingAnchor),
+        blur.trailingAnchor.constraint(equalTo: backgroundImage.trailingAnchor),
+        blur.heightAnchor.constraint(equalTo: backgroundImage.heightAnchor)
+        ])
+    }
+    
     private func venueImageContraints() {
         contentView.addSubview(venueImage)
         venueImage.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-        venueImage.topAnchor.constraint(equalTo: backgroundImage.centerYAnchor, constant: -50),
+        venueImage.topAnchor.constraint(equalTo: backgroundImage.centerYAnchor, constant: -70),
         venueImage.centerXAnchor.constraint(equalTo: centerXAnchor),
         venueImage.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.90),
-        venueImage.heightAnchor.constraint(equalToConstant: 180)
+        venueImage.heightAnchor.constraint(equalToConstant: 200)
         ])
     }
     
@@ -185,21 +249,76 @@ class DetailView: UIView {
            ])
        }
     
+    private func categorytitleConstraints() {
+        contentView.addSubview(categoryTitleLabel)
+        categoryTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            categoryTitleLabel.topAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 20),
+            categoryTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            categoryTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+        ])
+    }
+    
+    private func categoryIconConstraints() {
+        contentView.addSubview(categoryIcon)
+        categoryIcon.translatesAutoresizingMaskIntoConstraints = false
+        
+          NSLayoutConstraint.activate([
+            categoryIcon.topAnchor.constraint(equalTo: categoryTitleLabel.bottomAnchor, constant: 10),
+            categoryIcon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            categoryIcon.widthAnchor.constraint(equalToConstant: 20),
+            categoryIcon.heightAnchor.constraint(equalTo: categoryIcon.widthAnchor)
+          
+          ])
+    }
+    
+    private func cateoryConstraints() {
+        contentView.addSubview(categoryLabel)
+        categoryLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            categoryLabel.topAnchor.constraint(equalTo: categoryIcon.topAnchor),
+            categoryLabel.leadingAnchor.constraint(equalTo: categoryIcon.trailingAnchor, constant: 10),
+            categoryLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+        ])
+    }
+    
+    private func locationTitleConstraints() {
+        contentView.addSubview(locationTitleLabel)
+        locationTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+        locationTitleLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 20),
+        locationTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+        locationTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+        ])
+    }
+    
+    private func mapConstraints(){
+        contentView.addSubview(mapKitView)
+        mapKitView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            mapKitView.topAnchor.constraint(equalTo: locationTitleLabel.bottomAnchor, constant: 20),
+            mapKitView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.20),
+            mapKitView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            mapKitView.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+    }
+    
     
     private func venueDesConstraints() {
         contentView.addSubview(venueDescription)
         venueDescription.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            venueDescription.topAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 20),
+            venueDescription.topAnchor.constraint(equalTo: mapKitView.bottomAnchor, constant: 20),
             venueDescription.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             venueDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             venueDescription.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
 
         ])
     }
-
 }
 
-
-// SCROLL VIEW CONTENTS HAVE TO BE CONSTRAINED TO SCROLL VIEW NOT TO THE CONTENT VIEW - WHY?? IDK
