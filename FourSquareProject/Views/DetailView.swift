@@ -138,9 +138,7 @@ class DetailView: UIView {
         categoryIconConstraints()
         cateoryConstraints()
         locationTitleConstraints()
-        
         mapConstraints()
-        
         venueDesConstraints()
     }
     

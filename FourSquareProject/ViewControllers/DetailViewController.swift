@@ -7,10 +7,26 @@
 //
 
 import UIKit
+import DataPersistence
 
 class DetailViewController: UIViewController {
 
+    private var datapersistance: DataPersistence<Venue>
+    private var venue: Venue
+    private var photo: Photo
+
     private let detailView = DetailView()
+    
+    init(_ dataPersistance: DataPersistence<Venue>, venue: Venue, photo: Photo) {
+        self.datapersistance = dataPersistance
+        self.venue = venue
+        self.photo = photo
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) - error")
+    }
 
     override func loadView() {
         view = detailView
@@ -20,6 +36,13 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        
+        navigationController?.navigationBar.backgroundColor = .clear
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(moreButtonPressed(_:)))
+    }
+    
+    @objc private func moreButtonPressed(_ sender: UIBarButtonItem) {
+        print("Bar button pressed")
     }
 
 }
