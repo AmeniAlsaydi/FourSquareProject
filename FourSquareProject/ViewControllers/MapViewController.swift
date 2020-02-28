@@ -72,6 +72,7 @@ class MapViewController: UIViewController {
         listView.tableView.dataSource = self
         listView.tableView.register(TableViewCell.self, forCellReuseIdentifier: "tableViewCell")
         listView.tableView.delegate = self
+        listView.backgroundColor = .white
     }
     
     private func loadVenues(state: String, search: String) {
