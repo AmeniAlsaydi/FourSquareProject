@@ -75,7 +75,7 @@ class MapViewCell: UICollectionViewCell {
                 let suffix = photos.first?.suffix ?? ""
                 let venuePhotos = "\(prefix)original\(suffix)"
                 DispatchQueue.main.async {
-                    self.venueImage.getImage(with: venuePhotos) { (result) in
+                    self.venueImage.getImage(with: venuePhotos, writeTo: .cachesDirectory) { (result) in
                         switch result {
                         case .failure:
                             self.venueImage.image = UIImage(systemName: "tortoise.fill")

@@ -52,7 +52,7 @@ struct VenueApiClient {
         
         let request = URLRequest(url: url)
         
-        NetworkHelper.shared.performDataTask(with: request) { (result) in
+        NetworkHelper.shared.performDataTask(with: request, maxCacheDays: 2) { (result) in
             switch result {
             case .failure(let appError):
                 completeion(.failure(.networkClientError(appError)))
