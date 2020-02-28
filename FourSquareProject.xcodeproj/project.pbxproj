@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		137482FF24085F4F00531FCD /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137482FE24085F4F00531FCD /* ListViewController.swift */; };
+
+		137482FF24085F4F00531FCD /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137482FE24085F4F00531FCD /* OptionsViewController.swift */; };
+
 		1374830124085FF400531FCD /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1374830024085FF400531FCD /* ListView.swift */; };
 		B76B1D4B240072020075A8E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D4A240072020075A8E4 /* AppDelegate.swift */; };
 		B76B1D4D240072020075A8E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D4C240072020075A8E4 /* SceneDelegate.swift */; };
@@ -26,7 +28,7 @@
 		B76B1DF5240468520075A8E4 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DF4240468520075A8E4 /* Photo.swift */; };
 		B76B1DF7240470190075A8E4 /* VenueApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DF6240470190075A8E4 /* VenueApiClient.swift */; };
 		B76B1DFF240475B30075A8E4 /* FourSquareProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1DFE240475B30075A8E4 /* FourSquareProjectTests.swift */; };
-		B76B1E40240857710075A8E4 /* OptionsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1E3F240857710075A8E4 /* OptionsMenuView.swift */; };
+		B76B1E40240857710075A8E4 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1E3F240857710075A8E4 /* OptionsView.swift */; };
 		B76B1E4424085AF60075A8E4 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1E4224085AF60075A8E4 /* TableViewCell.swift */; };
 		B76B1E4524085AF60075A8E4 /* MapViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1E4324085AF60075A8E4 /* MapViewCell.swift */; };
 		C63C6A13240864370008116D /* SavedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63C6A12240864370008116D /* SavedCell.swift */; };
@@ -47,7 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		137482FE24085F4F00531FCD /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+
+		137482FE24085F4F00531FCD /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
+
 		1374830024085FF400531FCD /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		B76B1D47240072020075A8E4 /* FourSquareProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FourSquareProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B76B1D4A240072020075A8E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,7 +73,7 @@
 		B76B1DFC240475B30075A8E4 /* FourSquareProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FourSquareProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B76B1DFE240475B30075A8E4 /* FourSquareProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourSquareProjectTests.swift; sourceTree = "<group>"; };
 		B76B1E00240475B30075A8E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B76B1E3F240857710075A8E4 /* OptionsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsMenuView.swift; sourceTree = "<group>"; };
+		B76B1E3F240857710075A8E4 /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
 		B76B1E4224085AF60075A8E4 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewCell.swift; path = FourSquareProject/CellSubclasses/TableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		B76B1E4324085AF60075A8E4 /* MapViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewCell.swift; path = FourSquareProject/CellSubclasses/MapViewCell.swift; sourceTree = SOURCE_ROOT; };
 		C63C6A12240864370008116D /* SavedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCell.swift; sourceTree = "<group>"; };
@@ -146,7 +150,7 @@
 			children = (
 				B76B1DC92403FA060075A8E4 /* FourSquareTabController.swift */,
 				B76B1D62240076110075A8E4 /* MapViewController.swift */,
-				137482FE24085F4F00531FCD /* ListViewController.swift */,
+				137482FE24085F4F00531FCD /* OptionsViewController.swift */,
 				B76B1D70240087A00075A8E4 /* DetailViewController.swift */,
 				B76B1D662400764C0075A8E4 /* SavedViewController.swift */,
 				C63C6A142408709C0008116D /* SavedCollectionViewController.swift */,
@@ -161,7 +165,7 @@
 				1374830024085FF400531FCD /* ListView.swift */,
 				B76B1D6C240086F00075A8E4 /* SavedView.swift */,
 				B76B1D6E240087690075A8E4 /* DetailView.swift */,
-				B76B1E3F240857710075A8E4 /* OptionsMenuView.swift */,
+				B76B1E3F240857710075A8E4 /* OptionsView.swift */,
 				C63C6A16240870CE0008116D /* SavedCollectionView.swift */,
 			);
 			path = Views;
@@ -320,7 +324,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B76B1E40240857710075A8E4 /* OptionsMenuView.swift in Sources */,
+				B76B1E40240857710075A8E4 /* OptionsView.swift in Sources */,
 				B76B1D6D240086F00075A8E4 /* SavedView.swift in Sources */,
 				B76B1D6F240087690075A8E4 /* DetailView.swift in Sources */,
 				B76B1E4524085AF60075A8E4 /* MapViewCell.swift in Sources */,
@@ -341,7 +345,7 @@
 				B76B1E4424085AF60075A8E4 /* TableViewCell.swift in Sources */,
 				C63C6A462409A96F0008116D /* Collection.swift in Sources */,
 				B76B1DCC2403FE7B0075A8E4 /* Venue.swift in Sources */,
-				137482FF24085F4F00531FCD /* ListViewController.swift in Sources */,
+				137482FF24085F4F00531FCD /* OptionsViewController.swift in Sources */,
 				B76B1D4D240072020075A8E4 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

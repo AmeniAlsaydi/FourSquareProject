@@ -15,15 +15,15 @@ class DetailViewController: UIViewController {
     
     private var datapersistance: DataPersistence<Venue>
     private var venue: Venue
-    private var photo: Photo
+    private var photoID: String
     
     private let detailView = DetailView()
     private var locationSession = CoreLocationSession()
     
-    init(_ dataPersistance: DataPersistence<Venue>, venue: Venue, photo: Photo) {
+    init(_ dataPersistance: DataPersistence<Venue>, venue: Venue, photoID: String) {
         self.datapersistance = dataPersistance
         self.venue = venue
-        self.photo = photo
+        self.photoID = photoID
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -48,6 +48,10 @@ class DetailViewController: UIViewController {
     
     @objc private func moreButtonPressed(_ sender: UIBarButtonItem) {
         print("Bar button pressed")
+        
+        let optionsVC = OptionsViewController()
+        optionsVC.modalPresentationStyle = .overFullScreen
+        present(optionsVC, animated: true)
     }
     
     private func loadVenueAnnoatation(venue: Venue) {
@@ -88,22 +92,33 @@ class DetailViewController: UIViewController {
         }
         
         // venue photo
-        let prefix = photo.prefix
-        let suffix = photo.suffix
-        let imageUrl = "\(prefix)original\(suffix)"
         
-        detailView.backgroundImage.getImage(with: imageUrl) { (result) in
+        VenueApiClient.getVenuePhotos(venueID: photoID) { (result) in
             switch result {
             case .failure(let appError):
-
-                DispatchQueue.main.async {
-                    self.detailView.backgroundImage.image = UIImage(systemName: "folder")
+                print("\(appError)")
+            case .success(let photos):
+                //
+                guard let prefix = photos.first?.prefix, let suffix = photos.first?.suffix else {
+                    print("no prefix or suffix for image")
+                    return
                 }
-                print("error with loading venue photo \(appError)")
-            case .success(let image):
+                let imageUrl = "\(prefix)original\(suffix)"
                 DispatchQueue.main.async {
-                    self.detailView.backgroundImage.image = image
-                    self.detailView.venueImage.image = image
+                    self.detailView.backgroundImage.getImage(with: imageUrl) { (result) in
+                        switch result {
+                        case .failure(let appError):
+                            DispatchQueue.main.async {
+                                self.detailView.backgroundImage.image = UIImage(systemName: "folder")
+                            }
+                            print("error with loading venue photo \(appError)")
+                        case .success(let image):
+                            DispatchQueue.main.async {
+                                self.detailView.backgroundImage.image = image
+                                self.detailView.venueImage.image = image
+                            }
+                        }
+                    }
                 }
             }
         }
