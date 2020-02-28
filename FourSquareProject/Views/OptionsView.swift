@@ -9,6 +9,9 @@
 import UIKit
 
 class OptionsView: UIView {
+    
+    public var bottomMenuHeight: NSLayoutConstraint?
+
 
       override func layoutSubviews() {
           super.layoutSubviews()
@@ -116,13 +119,14 @@ class OptionsView: UIView {
       
       
       // add list view
-      public lazy var createButton: UIButton = {
-          let button = UIButton()
-          button.setTitle("Create New Collection", for: .normal)
-          button.backgroundColor = .black
-          return button
-      }()
-      
+    
+    public lazy var addToCollectionView: AddToCollectionView = {
+        let view = AddToCollectionView()
+        view.layer.borderWidth = 1
+        view.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        return view
+    }()
+          
       public lazy var collectionList: UICollectionView = {
           let cv = UICollectionView()
           cv.backgroundColor = .black
@@ -142,9 +146,8 @@ class OptionsView: UIView {
           textfeildConstraints()
           submitTipConstraints()
           
-          //constrainCreateButton()
-          //constrainCV()
-          
+          addToCollectionViewConstraints()
+        
           buttonStackConstraint()
           labelsStackConstraint()
       }
@@ -204,7 +207,20 @@ class OptionsView: UIView {
           ])
           
       }
-      
+    
+    private func addToCollectionViewConstraints() {
+        addSubview(addToCollectionView)
+        addToCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            addToCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            addToCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            addToCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+        
+        bottomMenuHeight = addToCollectionView.heightAnchor.constraint(equalToConstant: 0)
+        bottomMenuHeight?.isActive = true
+    }
       
 
 }

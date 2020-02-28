@@ -9,15 +9,11 @@
 import UIKit
 
 class OptionsViewController: UIViewController {
-
     
     private let optionsView = OptionsView()
     
-    //private let addListView = AddToListView()
-    
     override func loadView() {
         view = optionsView
-        //view = addListView
     }
     
     override func viewDidLoad() {
@@ -54,6 +50,19 @@ class OptionsViewController: UIViewController {
     
     @objc private func addToListButtonPressed(_ sender: UIButton) {
         print("addToListButtonPressed")
+        
+        UIView.animate(withDuration: 0.3) {
+        
+        self.optionsView.bottomMenuHeight?.isActive = false
+        self.optionsView.bottomMenuHeight = self.optionsView.addToCollectionView.heightAnchor.constraint(equalTo: self.optionsView.heightAnchor, multiplier: 0.3)
+        self.optionsView.bottomMenuHeight?.isActive = true
+        self.optionsView.layoutIfNeeded()
+        
+        self.optionsView.labelStack.isHidden = true
+        self.optionsView.buttonStack.isHidden = true
+
+        }
+        
     }
 
 }

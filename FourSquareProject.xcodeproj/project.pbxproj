@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-
 		137482FF24085F4F00531FCD /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137482FE24085F4F00531FCD /* OptionsViewController.swift */; };
-
 		1374830124085FF400531FCD /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1374830024085FF400531FCD /* ListView.swift */; };
+		B7646B4B2409B81B0088AA84 /* AddToCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7646B4A2409B81B0088AA84 /* AddToCollectionView.swift */; };
 		B76B1D4B240072020075A8E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D4A240072020075A8E4 /* AppDelegate.swift */; };
 		B76B1D4D240072020075A8E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76B1D4C240072020075A8E4 /* SceneDelegate.swift */; };
 		B76B1D54240072040075A8E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B76B1D53240072040075A8E4 /* Assets.xcassets */; };
@@ -49,10 +48,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-
 		137482FE24085F4F00531FCD /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
-
 		1374830024085FF400531FCD /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		B7646B4A2409B81B0088AA84 /* AddToCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCollectionView.swift; sourceTree = "<group>"; };
 		B76B1D47240072020075A8E4 /* FourSquareProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FourSquareProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B76B1D4A240072020075A8E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B76B1D4C240072020075A8E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -162,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				B76B1D682400766E0075A8E4 /* MapView.swift */,
+				B7646B4A2409B81B0088AA84 /* AddToCollectionView.swift */,
 				1374830024085FF400531FCD /* ListView.swift */,
 				B76B1D6C240086F00075A8E4 /* SavedView.swift */,
 				B76B1D6E240087690075A8E4 /* DetailView.swift */,
@@ -331,6 +330,7 @@
 				C63C6A152408709C0008116D /* SavedCollectionViewController.swift in Sources */,
 				B76B1DF22404618A0075A8E4 /* CoreLocationSession.swift in Sources */,
 				B76B1D4B240072020075A8E4 /* AppDelegate.swift in Sources */,
+				B7646B4B2409B81B0088AA84 /* AddToCollectionView.swift in Sources */,
 				C6C74FA72404802200CF5629 /* Config.swift in Sources */,
 				B76B1D692400766E0075A8E4 /* MapView.swift in Sources */,
 				B76B1D63240076110075A8E4 /* MapViewController.swift in Sources */,
