@@ -20,6 +20,12 @@ class MapViewController: UIViewController {
     
     private var isButtonPressed = false
     
+    private lazy var tapGesture: UITapGestureRecognizer = {
+        let gesture = UITapGestureRecognizer()
+        gesture.addTarget(self, action: #selector(didTap(_:)))
+        return gesture
+    }()
+    
     private var venues = [Venue]() {
         didSet {
             DispatchQueue.main.async {
@@ -58,6 +64,7 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureNavBar()
+        mapView.addGestureRecognizer(tapGesture)
         
         //mapview
         mapView.collectionView.register(MapViewCell.self, forCellWithReuseIdentifier: "mapViewCell")
@@ -86,6 +93,10 @@ class MapViewController: UIViewController {
         }
     }
 
+    @objc private func didTap(_ sender: UITapGestureRecognizer) {
+        mapView.venueTextField.resignFirstResponder()
+        mapView.locationTextField.resignFirstResponder()
+    }
     
     private func makeAnnotations() -> [MKPointAnnotation] {
         var annotations = [MKPointAnnotation]()
