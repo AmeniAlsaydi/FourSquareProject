@@ -32,7 +32,5 @@ class FourSquareTabController: UITabBarController {
         UINavigationController(rootViewController: savedVC)]
 
     }
-    
-
 
 }
