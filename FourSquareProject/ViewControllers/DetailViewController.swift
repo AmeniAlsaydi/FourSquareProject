@@ -13,14 +13,14 @@ import MapKit
 
 class DetailViewController: UIViewController {
     
-    private var datapersistance: DataPersistence<Venue>
+    private var datapersistance: DataPersistence<Collection>
     private var venue: Venue
     private var photoID: String
     
     private let detailView = DetailView()
     private var locationSession = CoreLocationSession()
     
-    init(_ dataPersistance: DataPersistence<Venue>, venue: Venue, photoID: String) {
+    init(_ dataPersistance: DataPersistence<Collection>, venue: Venue, photoID: String) {
         self.datapersistance = dataPersistance
         self.venue = venue
         self.photoID = photoID
