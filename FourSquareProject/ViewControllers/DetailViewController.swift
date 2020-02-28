@@ -48,6 +48,10 @@ class DetailViewController: UIViewController {
     
     @objc private func moreButtonPressed(_ sender: UIBarButtonItem) {
         print("Bar button pressed")
+        
+        let optionsVC = OptionsViewController()
+        optionsVC.modalPresentationStyle = .overFullScreen
+        present(optionsVC, animated: true)
     }
     
     private func loadVenueAnnoatation(venue: Venue) {
@@ -89,60 +93,35 @@ class DetailViewController: UIViewController {
         
         // venue photo
         
-         VenueApiClient.getVenuePhotos(venueID: photoID) { (result) in
-                   switch result {
-                   case .failure(let appError):
-                       print("\(appError)")
-                   case .success(let photos):
-                   //
-                       guard let prefix = photos.first?.prefix, let suffix = photos.first?.suffix else {
-                           print("no prefix or suffix for image")
-                           return
-                       }
-                       let imageUrl = "\(prefix)original\(suffix)"
-                       DispatchQueue.main.async {
-                           self.detailView.backgroundImage.getImage(with: imageUrl) { (result) in
-                               switch result {
-                               case .failure(let appError):
-                                   DispatchQueue.main.async {
-                                       self.detailView.backgroundImage.image = UIImage(systemName: "folder")
-                                   }
-                                   print("error with loading venue photo \(appError)")
-                               case .success(let image):
-                                   DispatchQueue.main.async {
-                                       self.detailView.backgroundImage.image = image
-                                       self.detailView.venueImage.image = image
-                                   }
-                               }
-                           }
-                       }
-               //
-                   }
-        }
-        
-        //===============//===============//===============
-
-            /*
-        detailView.backgroundImage.getImage(with: photoID) { (result) in
+        VenueApiClient.getVenuePhotos(venueID: photoID) { (result) in
             switch result {
             case .failure(let appError):
-
-                DispatchQueue.main.async {
-                    self.detailView.backgroundImage.image = UIImage(systemName: "folder")
+                print("\(appError)")
+            case .success(let photos):
+                //
+                guard let prefix = photos.first?.prefix, let suffix = photos.first?.suffix else {
+                    print("no prefix or suffix for image")
+                    return
                 }
-                print("error with loading venue photo \(appError)")
-            case .success(let image):
+                let imageUrl = "\(prefix)original\(suffix)"
                 DispatchQueue.main.async {
-                    self.detailView.backgroundImage.image = image
-                    self.detailView.venueImage.image = image
+                    self.detailView.backgroundImage.getImage(with: imageUrl) { (result) in
+                        switch result {
+                        case .failure(let appError):
+                            DispatchQueue.main.async {
+                                self.detailView.backgroundImage.image = UIImage(systemName: "folder")
+                            }
+                            print("error with loading venue photo \(appError)")
+                        case .success(let image):
+                            DispatchQueue.main.async {
+                                self.detailView.backgroundImage.image = image
+                                self.detailView.venueImage.image = image
+                            }
+                        }
+                    }
                 }
             }
         }
- */
-        
-        //===============//===============//===============
-
-
         
         // venue annotation on map
         

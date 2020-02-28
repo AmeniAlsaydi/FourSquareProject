@@ -17,7 +17,7 @@ struct VenueApiClient {
         let searchQuery = searchQuery.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "target"
         let state = state.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "miami"
         
-        let endpoint = "https://api.foursquare.com/v2/venues/search?client_id=\(Config.clientID)&client_secret=\(Config.clientSecret)&near=\(state)&query=\(searchQuery)&v=20211010&limit=5"
+        let endpoint = "https://api.foursquare.com/v2/venues/search?client_id=\(Config.clientID)&client_secret=\(Config.clientSecret)&near=\(state)&query=\(searchQuery)&v=20211010&limit=1"
          
         
         guard let url = URL(string: endpoint) else {
@@ -42,7 +42,7 @@ struct VenueApiClient {
     }
     
     static func getVenuePhotos(venueID: String, completeion: @escaping (Result<[Photo], AppError>) -> ()) {
-        let endpoint = "https://api.foursquare.com/v2/venues/\(venueID)/photos?client_id=\(Config.clientID)&client_secret=\(Config.clientSecret)&v=20211010&limit=5"
+        let endpoint = "https://api.foursquare.com/v2/venues/\(venueID)/photos?client_id=\(Config.clientID)&client_secret=\(Config.clientSecret)&v=20211010&limit=1"
         
         
         guard let url = URL(string: endpoint) else {
