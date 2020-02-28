@@ -48,9 +48,9 @@ class MapViewCell: UICollectionViewCell {
         venueImage.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            venueImage.topAnchor.constraint(equalTo: topAnchor),
-            venueImage.leadingAnchor.constraint(equalTo: leadingAnchor),
-            venueImage.bottomAnchor.constraint(equalTo: bottomAnchor),
+            venueImage.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            venueImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            venueImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
             venueImage.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4),
             venueImage.heightAnchor.constraint(equalTo: venueImage.widthAnchor)
         ])

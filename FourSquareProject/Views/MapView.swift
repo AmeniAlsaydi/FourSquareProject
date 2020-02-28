@@ -117,7 +117,7 @@ class MapView: UIView {
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            collectionView.heightAnchor.constraint(equalTo: mapKitView.heightAnchor , multiplier: 0.2)
+            collectionView.heightAnchor.constraint(equalTo: mapKitView.heightAnchor , multiplier: 0.15)
         ])
     }
     
