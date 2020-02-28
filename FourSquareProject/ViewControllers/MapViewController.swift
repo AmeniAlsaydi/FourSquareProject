@@ -65,6 +65,7 @@ class MapViewController: UIViewController {
         view.backgroundColor = .systemBackground
         configureNavBar()
         mapView.addGestureRecognizer(tapGesture)
+        convertPlaceNameToCoordinate("Long Island City")
         
         //mapview
         mapView.collectionView.register(MapViewCell.self, forCellWithReuseIdentifier: "mapViewCell")
