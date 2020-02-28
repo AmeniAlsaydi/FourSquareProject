@@ -7,14 +7,31 @@
 //
 
 import UIKit
+import DataPersistence
 
 class SavedCollectionViewController: UIViewController {
+    private var datapersistence: DataPersistence<Venue>
     
     private var savedColletionView = SavedCollectionView()
     
     public var category: String?
     
-    private var savedVenues = [Venue]()
+    public var savedVenues = [Venue]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.savedColletionView.collectionView.reloadData()
+            }
+        }
+    }
+    
+    init(_ dataPersistence: DataPersistence<Venue>) {
+        self.datapersistence = dataPersistence
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) - error")
+    }
     
     override func loadView() {
         view = savedColletionView
@@ -32,6 +49,7 @@ class SavedCollectionViewController: UIViewController {
         savedColletionView.collectionView.register(MapViewCell.self, forCellWithReuseIdentifier: "mapViewCell")
     }
     
+
 }
 extension SavedCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -57,6 +75,33 @@ extension SavedCollectionViewController: UICollectionViewDataSource {
         cell.configureCell(venue: saved)
         return cell
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? MapViewCell else {
+            return
+        }
+        showMenu(for: cell)
+    }
     
+    private func showMenu(for cell: MapViewCell) {
+        guard let indexPath = savedColletionView.collectionView.indexPath(for: cell) else {
+            return
+        }
+        let optionsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let delete = UIAlertAction(title: "Delete", style: .destructive) { [weak self] (action) in
+            do{
+                try self?.datapersistence.deleteItem(at: indexPath.row)
+                self?.savedColletionView.collectionView.reloadData()
+            }catch{
+                print("could not delete")
+            }
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { [weak self] (action) in
+            self?.dismiss(animated: true)
+        }
+        optionsMenu.addAction(delete)
+        optionsMenu.addAction(cancel)
+        present(optionsMenu, animated: true, completion: nil)
+    }
     
 }
