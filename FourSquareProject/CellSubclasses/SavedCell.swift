@@ -21,6 +21,12 @@ class SavedCell: UICollectionViewCell {
         label.font = UIFont(name: "Helvetica", size: 20)
         return label
     }()
+    public lazy var collectionImage: UIImageView = {
+       let image = UIImageView()
+        image.image = UIImage(systemName: "photo")
+        image.contentMode = .scaleAspectFill
+        return image
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,15 +37,26 @@ class SavedCell: UICollectionViewCell {
         commonInit()
     }
     private func commonInit() {
+        imageConstraints()
         labelConstraints()
     }
-    
+    private func imageConstraints() {
+        addSubview(collectionImage)
+        collectionImage.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            collectionImage.topAnchor.constraint(equalTo: topAnchor),
+            collectionImage.trailingAnchor.constraint(equalTo: trailingAnchor),
+            collectionImage.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionImage.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.6)
+        ])
+    }
     private func labelConstraints() {
         addSubview(collectionLabel)
         collectionLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            collectionLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            collectionLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+            collectionLabel.topAnchor.constraint(equalTo: collectionImage.bottomAnchor, constant: 10),
+            collectionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            collectionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10)
         ])
     }
     
