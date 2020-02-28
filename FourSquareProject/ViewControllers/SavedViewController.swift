@@ -78,7 +78,7 @@ extension SavedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let category = savedVenueCategories[indexPath.row]
         
-        let savedCollectionVC = SavedCollectionViewController()
+        let savedCollectionVC = SavedCollectionViewController(datapersistance)
         savedCollectionVC.category = category.collectionName
         
         navigationController?.pushViewController(savedCollectionVC, animated: true)
