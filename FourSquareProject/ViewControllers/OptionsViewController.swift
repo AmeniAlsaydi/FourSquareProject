@@ -9,10 +9,8 @@
 import UIKit
 
 class OptionsViewController: UIViewController {
-
     
     private let optionsView = OptionsView()
-    private var menuShowing = false
     
     override func loadView() {
         view = optionsView
@@ -53,34 +51,18 @@ class OptionsViewController: UIViewController {
     @objc private func addToListButtonPressed(_ sender: UIButton) {
         print("addToListButtonPressed")
         
-        if menuShowing {
-            UIView.animate(withDuration: 0.3) {
-                self.optionsView.bottomMenuHeight?.isActive = false
-                self.optionsView.bottomMenuHeight = self.optionsView.addToCollectionView.heightAnchor.constraint(equalToConstant: 0)
-                self.optionsView.bottomMenuHeight?.isActive = true
-                self.optionsView.layoutIfNeeded()
-
-            }
-            
-        } else {
-            UIView.animate(withDuration: 0.3) {
-                
-                self.optionsView.bottomMenuHeight?.isActive = false
-                self.optionsView.bottomMenuHeight = self.optionsView.addToCollectionView.heightAnchor.constraint(equalTo: self.optionsView.heightAnchor, multiplier: 0.3)
-                self.optionsView.bottomMenuHeight?.isActive = true
-                self.optionsView.layoutIfNeeded()
-                
-                self.optionsView.labelStack.isHidden = true
-                self.optionsView.buttonStack.isHidden = true
-
-            }
-            
-        }
-        menuShowing = !menuShowing
+        UIView.animate(withDuration: 0.3) {
         
-        // stack views disappear except the cancel button
+        self.optionsView.bottomMenuHeight?.isActive = false
+        self.optionsView.bottomMenuHeight = self.optionsView.addToCollectionView.heightAnchor.constraint(equalTo: self.optionsView.heightAnchor, multiplier: 0.3)
+        self.optionsView.bottomMenuHeight?.isActive = true
+        self.optionsView.layoutIfNeeded()
+        
+        self.optionsView.labelStack.isHidden = true
+        self.optionsView.buttonStack.isHidden = true
+
+        }
         
     }
-    
 
 }
