@@ -16,13 +16,13 @@ class SavedCollectionViewController: UIViewController {
     
     public var category: String?
     
-    private var savedVenues = [Venue]()
-    
-    private lazy var longPress: UILongPressGestureRecognizer = {
-       let gesture = UILongPressGestureRecognizer()
-        gesture.addTarget(MapViewCell.self, action: #selector(didLongPress(_:)))
-        return gesture
-    }()
+    public var savedVenues = [Venue]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.savedColletionView.collectionView.reloadData()
+            }
+        }
+    }
     
     init(_ dataPersistence: DataPersistence<Venue>) {
         self.datapersistence = dataPersistence
@@ -44,38 +44,12 @@ class SavedCollectionViewController: UIViewController {
         navigationItem.title = "\(category ?? "")"
         savedColletionView.backgroundColor = .systemBackground
         
-        savedColletionView.addGestureRecognizer(longPress)
-        
         savedColletionView.collectionView.delegate = self
         savedColletionView.collectionView.dataSource = self
         savedColletionView.collectionView.register(MapViewCell.self, forCellWithReuseIdentifier: "mapViewCell")
     }
     
-    @objc private func didLongPress(_ sender: UILongPressGestureRecognizer) {
-        //showMenu(for: )
-    }
-    
-    private func showMenu(for cell: MapViewCell) {
-        guard let indexPath = savedColletionView.collectionView.indexPath(for: cell) else {
-            return
-        }
-        let optionsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        let delete = UIAlertAction(title: "Delete", style: .destructive) { [weak self] (action) in
-            do{
-                try self?.datapersistence.deleteItem(at: indexPath.row)
-                self?.savedColletionView.collectionView.reloadData()
-            }catch{
-                print("could not delete")
-            }
-        }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { [weak self] (action) in
-            self?.dismiss(animated: true)
-        }
-        optionsMenu.addAction(delete)
-        optionsMenu.addAction(cancel)
-        present(optionsMenu, animated: true, completion: nil)
-    }
 }
 extension SavedCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -101,6 +75,33 @@ extension SavedCollectionViewController: UICollectionViewDataSource {
         cell.configureCell(venue: saved)
         return cell
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? MapViewCell else {
+            return
+        }
+        showMenu(for: cell)
+    }
     
+    private func showMenu(for cell: MapViewCell) {
+        guard let indexPath = savedColletionView.collectionView.indexPath(for: cell) else {
+            return
+        }
+        let optionsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let delete = UIAlertAction(title: "Delete", style: .destructive) { [weak self] (action) in
+            do{
+                try self?.datapersistence.deleteItem(at: indexPath.row)
+                self?.savedColletionView.collectionView.reloadData()
+            }catch{
+                print("could not delete")
+            }
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { [weak self] (action) in
+            self?.dismiss(animated: true)
+        }
+        optionsMenu.addAction(delete)
+        optionsMenu.addAction(cancel)
+        present(optionsMenu, animated: true, completion: nil)
+    }
     
 }

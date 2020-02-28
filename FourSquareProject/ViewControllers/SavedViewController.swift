@@ -14,7 +14,8 @@ class SavedViewController: UIViewController {
     
     private var savedView = SavedView()
     
-    private var savedVenueCategories = [Venue]() {
+    //change to collection array
+    private var savedVenueCollections = [Collection]() {
         didSet {
             savedView.collectionView.reloadData()
         }
@@ -60,26 +61,26 @@ extension SavedViewController: UICollectionViewDelegateFlowLayout {
 }
 extension SavedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return savedVenueCategories.map{$0.collectionName}.count
+        return savedVenueCollections.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = savedView.collectionView.dequeueReusableCell(withReuseIdentifier: "savedCell", for: indexPath) as? SavedCell else {
             fatalError("could not cast to SavedCell")
         }
-        let saved = savedVenueCategories[indexPath.row]
-        cell.collectionLabel.text = saved.collectionName
-        
+        let saved = savedVenueCollections[indexPath.row]
+        cell.collectionLabel.text = saved.title
         cell.backgroundColor = .white
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let category = savedVenueCategories[indexPath.row]
+        let category = savedVenueCollections[indexPath.row]
         
         let savedCollectionVC = SavedCollectionViewController(datapersistance)
-        savedCollectionVC.category = category.collectionName
+        savedCollectionVC.category = category.title
+        savedCollectionVC.savedVenues = category.venues
         
         navigationController?.pushViewController(savedCollectionVC, animated: true)
     }
