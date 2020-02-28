@@ -9,6 +9,9 @@
 import UIKit
 
 class OptionsView: UIView {
+    
+    public var bottomMenuHeight: NSLayoutConstraint?
+
 
       override func layoutSubviews() {
           super.layoutSubviews()
@@ -210,11 +213,13 @@ class OptionsView: UIView {
         addToCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            addToCollectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            addToCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
             addToCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            addToCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            addToCollectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.30)
+            addToCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
+        
+        bottomMenuHeight = addToCollectionView.heightAnchor.constraint(equalToConstant: 0)
+        bottomMenuHeight?.isActive = true
     }
       
 

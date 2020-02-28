@@ -27,7 +27,6 @@ class AddToCollectionView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        cv.backgroundColor = .green
         return cv
     }()
     
@@ -52,6 +51,7 @@ class AddToCollectionView: UIView {
     private func commonInit() {
         
         constrainTopLabel()
+        constrainAddButton() 
         constrainCV()
         constrainBottomButton()
     }
@@ -69,6 +69,18 @@ class AddToCollectionView: UIView {
         
     }
     
+    private func constrainAddButton() {
+        addSubview(addButton)
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            addButton.widthAnchor.constraint(equalToConstant: 60),
+            addButton.heightAnchor.constraint(equalTo: topLabel.heightAnchor),
+            addButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            addButton.topAnchor.constraint(equalTo: topAnchor)
+        ])
+    }
+    
     private func constrainCV() {
            addSubview(collectionList)
            collectionList.translatesAutoresizingMaskIntoConstraints = false
@@ -76,7 +88,9 @@ class AddToCollectionView: UIView {
            NSLayoutConstraint.activate([
             collectionList.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionList.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionList.topAnchor.constraint(equalTo: topLabel.bottomAnchor)           ])
+            collectionList.topAnchor.constraint(equalTo: topLabel.bottomAnchor),
+            collectionList.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.55)
+           ])
        }
     
     private func constrainBottomButton() {
@@ -87,7 +101,7 @@ class AddToCollectionView: UIView {
             bottomButton.topAnchor.constraint(equalTo: collectionList.bottomAnchor),
             bottomButton.trailingAnchor.constraint(equalTo: trailingAnchor),
             bottomButton.leadingAnchor.constraint(equalTo: leadingAnchor),
-            bottomButton.bottomAnchor.constraint(equalTo: bottomAnchor),
+            //bottomButton.bottomAnchor.constraint(equalTo: bottomAnchor),
             bottomButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
