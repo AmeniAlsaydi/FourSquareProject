@@ -267,9 +267,12 @@ extension MapViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedVenue = venues[indexPath.row]
-       // let selectedPhoto = venuePhotos[indexPath.row]
-      //  let detailedVC = DetailViewController(datapersistance, venue: selectedVenue, photo: selectedPhoto)
-      //  navigationController?.pushViewController(detailedVC, animated: true)
+        // instead pass in photoID
+        let photoID = selectedVenue.id
+        
+        
+        let detailedVC = DetailViewController(datapersistance, venue: selectedVenue, photoID: photoID)
+        navigationController?.pushViewController(detailedVC, animated: true)
     }
 }
 
