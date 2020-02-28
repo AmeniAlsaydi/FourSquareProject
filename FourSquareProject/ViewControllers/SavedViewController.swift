@@ -14,7 +14,7 @@ class SavedViewController: UIViewController {
     
     private var savedView = SavedView()
     
-    private var savedVenueCategories = ["Favorite Places"] {
+    private var savedVenueCategories = [Venue]() {
         didSet {
             savedView.collectionView.reloadData()
         }
@@ -60,7 +60,7 @@ extension SavedViewController: UICollectionViewDelegateFlowLayout {
 }
 extension SavedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return savedVenueCategories.count
+        return savedVenueCategories.map{$0.collectionName}.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -68,9 +68,9 @@ extension SavedViewController: UICollectionViewDataSource {
             fatalError("could not cast to SavedCell")
         }
         let saved = savedVenueCategories[indexPath.row]
-        cell.collectionLabel.text = saved
+        cell.collectionLabel.text = saved.collectionName
         
-        cell.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+        cell.backgroundColor = .white
         
         return cell
     }
@@ -79,7 +79,7 @@ extension SavedViewController: UICollectionViewDataSource {
         let category = savedVenueCategories[indexPath.row]
         
         let savedCollectionVC = SavedCollectionViewController()
-        savedCollectionVC.category = category
+        savedCollectionVC.category = category.collectionName
         
         navigationController?.pushViewController(savedCollectionVC, animated: true)
     }
