@@ -22,6 +22,7 @@ struct Venue: Codable & Equatable  {
     let name: String
     let location: Location
     let categories: [Category]
+    let collectionName: String?
 }
 
 struct Location: Codable & Equatable{
