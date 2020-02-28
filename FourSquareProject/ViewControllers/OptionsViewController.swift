@@ -12,6 +12,8 @@ class OptionsViewController: UIViewController {
     
     private let optionsView = OptionsView()
     
+    private var isAddToCollectionButtonPressed = false
+    
     override func loadView() {
         view = optionsView
     }
@@ -27,6 +29,7 @@ class OptionsViewController: UIViewController {
         optionsView.cancelButton.addTarget(self, action: #selector(cancelPressed(_:)), for: .touchUpInside)
         optionsView.submitButton.addTarget(self, action: #selector(cancelPressed(_:)), for: .touchUpInside)
         optionsView.addToListButton.addTarget(self, action: #selector(addToListButtonPressed(_:)), for: .touchUpInside)
+        optionsView.addToCollectionView.addButton.addTarget(self, action: #selector(createCollectionButtonPressed(_:)), for: .touchUpInside)
     }
     
     @objc private func leaveTipButtonPressed(_ sender: UIButton) {
@@ -51,6 +54,7 @@ class OptionsViewController: UIViewController {
     @objc private func addToListButtonPressed(_ sender: UIButton) {
         print("addToListButtonPressed")
         
+        
         UIView.animate(withDuration: 0.3) {
         
         self.optionsView.bottomMenuHeight?.isActive = false
@@ -63,6 +67,16 @@ class OptionsViewController: UIViewController {
 
         }
         
+    }
+    
+    @objc private func createCollectionButtonPressed(_ sender: UIButton) {
+        isAddToCollectionButtonPressed.toggle()
+        
+        if isAddToCollectionButtonPressed {
+            optionsView.addToCollectionView.collectionList.isHidden = true
+            optionsView.addToListLabel.text = "New Collection"
+            
+        }
     }
 
 }

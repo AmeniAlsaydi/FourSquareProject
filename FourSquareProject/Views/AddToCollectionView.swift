@@ -38,6 +38,19 @@ class AddToCollectionView: UIView {
         return button
     }()
     
+    public lazy var collectionImage: UIImageView = {
+       let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    public lazy var collectionNameTextField: UITextField = {
+        let textField = UITextField()
+        textField.borderStyle = .line
+        textField.textAlignment = .center
+        textField.placeholder = "name collection"
+        return textField
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
@@ -93,15 +106,37 @@ class AddToCollectionView: UIView {
            ])
        }
     
+    private func constrainCollectionImage() {
+        addSubview(collectionImage)
+        collectionImage.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            collectionImage.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionImage.trailingAnchor.constraint(equalTo: trailingAnchor),
+            collectionImage.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionImage.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3)
+        ])
+    }
+    private func constrainTextField() {
+        addSubview(collectionNameTextField)
+        collectionNameTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            collectionNameTextField.topAnchor.constraint(equalTo: collectionImage.bottomAnchor, constant: 10),
+            collectionNameTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            collectionNameTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+        ])
+    }
+    
     private func constrainBottomButton() {
         addSubview(bottomButton)
         bottomButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            bottomButton.topAnchor.constraint(equalTo: collectionList.bottomAnchor),
+            //bottomButton.topAnchor.constraint(equalTo: collectionList.bottomAnchor),
             bottomButton.trailingAnchor.constraint(equalTo: trailingAnchor),
             bottomButton.leadingAnchor.constraint(equalTo: leadingAnchor),
-            //bottomButton.bottomAnchor.constraint(equalTo: bottomAnchor),
+            bottomButton.bottomAnchor.constraint(equalTo: bottomAnchor),
             bottomButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
