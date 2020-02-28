@@ -10,7 +10,7 @@ import UIKit
 import DataPersistence
 
 class SavedCollectionViewController: UIViewController {
-    private var datapersistence: DataPersistence<Venue>
+    private var datapersistence: DataPersistence<Collection>
     
     private var savedColletionView = SavedCollectionView()
     
@@ -24,7 +24,7 @@ class SavedCollectionViewController: UIViewController {
         }
     }
     
-    init(_ dataPersistence: DataPersistence<Venue>) {
+    init(_ dataPersistence: DataPersistence<Collection>) {
         self.datapersistence = dataPersistence
         super.init(nibName: nil, bundle: nil)
     }

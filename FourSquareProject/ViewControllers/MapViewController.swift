@@ -12,7 +12,7 @@ import MapKit
 
 class MapViewController: UIViewController {
     
-    private var datapersistance: DataPersistence<Venue>
+    private var datapersistance: DataPersistence<Collection>
     
     private var mapView = MapView()
     
@@ -41,7 +41,7 @@ class MapViewController: UIViewController {
     private var annotations = [MKAnnotation]()
     private let coreLocationSession = CoreLocationSession()
     
-    init(_ dataPersistance: DataPersistence<Venue>) {
+    init(_ dataPersistance: DataPersistence<Collection>) {
         self.datapersistance = dataPersistance
         super.init(nibName: nil, bundle: nil)
     }
@@ -81,24 +81,10 @@ class MapViewController: UIViewController {
                 print("error getting data from api \(appError)")
             case .success(let venues):
                 self.venues = venues
-                //                DispatchQueue.main.async {
-                //                    for venue in venues {
-                //                        self.loadVenuePhotos(venueID: venue.id)
-                //                    }
-                //                }
             }
         }
     }
-    //    private func loadVenuePhotos(venueID: String) {
-    //        VenueApiClient.getVenuePhotos(venueID: venueID) { (result) in
-    //            switch result {
-    //            case .failure(let picError):
-    //                print("error getting venue photos \(picError)")
-    //            case .success(let photos):
-    //                self.venuePhotos = photos
-    //            }
-    //        }
-    //    }
+
     
     private func makeAnnotations() -> [MKPointAnnotation] {
         var annotations = [MKPointAnnotation]()
@@ -181,14 +167,12 @@ extension MapViewController: UICollectionViewDataSource {
         }
         cell.backgroundColor = .white
         let venue = venues[indexPath.row]
-        //let photo = venuePhotos[indexPath.row]
         cell.configureCell(venue: venue)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
          let selectedVenue = venues[indexPath.row]
-         // instead pass in photoID
          let photoID = selectedVenue.id
          
          let detailedVC = DetailViewController(datapersistance, venue: selectedVenue, photoID: photoID)
@@ -221,7 +205,8 @@ extension MapViewController: MKMapViewDelegate {
         guard let venue = (venues.filter {$0.name == annotation.title}).first else {
             return
         }
-        //TODO: present detail view
+        
+        
         
     }
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

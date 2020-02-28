@@ -10,11 +10,11 @@ import UIKit
 import DataPersistence
 
 class SavedViewController: UIViewController {
-    private var datapersistance: DataPersistence<Venue>
+    
+    private var datapersistence: DataPersistence<Collection>
     
     private var savedView = SavedView()
     
-    //change to collection array
     private var savedVenueCollections = [Collection]() {
         didSet {
             savedView.collectionView.reloadData()
@@ -25,8 +25,8 @@ class SavedViewController: UIViewController {
         view = savedView
     }
     
-    init(_ dataPersistance: DataPersistence<Venue>) {
-        self.datapersistance = dataPersistance
+    init(_ dataPersistence: DataPersistence<Collection>) {
+        self.datapersistence = dataPersistence
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -78,7 +78,7 @@ extension SavedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let category = savedVenueCollections[indexPath.row]
         
-        let savedCollectionVC = SavedCollectionViewController(datapersistance)
+        let savedCollectionVC = SavedCollectionViewController(datapersistence)
         savedCollectionVC.category = category.title
         savedCollectionVC.savedVenues = category.venues
         
