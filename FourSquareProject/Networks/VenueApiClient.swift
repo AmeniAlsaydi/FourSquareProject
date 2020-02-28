@@ -42,7 +42,7 @@ struct VenueApiClient {
     }
     
     static func getVenuePhotos(venueID: String, completeion: @escaping (Result<[Photo], AppError>) -> ()) {
-        let endpoint = "https://api.foursquare.com/v2/venues/\(venueID)/photos?client_id=\(Config.clientID)&client_secret=\(Config.clientSecret)&v=20211010"
+        let endpoint = "https://api.foursquare.com/v2/venues/\(venueID)/photos?client_id=\(Config.clientID)&client_secret=\(Config.clientSecret)&v=20211010&limit=5"
         
         
         guard let url = URL(string: endpoint) else {
