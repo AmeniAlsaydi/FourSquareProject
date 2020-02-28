@@ -51,7 +51,8 @@ class MapViewCell: UICollectionViewCell {
             venueImage.topAnchor.constraint(equalTo: topAnchor),
             venueImage.leadingAnchor.constraint(equalTo: leadingAnchor),
             venueImage.bottomAnchor.constraint(equalTo: bottomAnchor),
-            venueImage.widthAnchor.constraint(equalToConstant: 200)
+            venueImage.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4),
+            venueImage.heightAnchor.constraint(equalTo: venueImage.widthAnchor)
         ])
     }
     private func labelConstraints() {
@@ -59,8 +60,8 @@ class MapViewCell: UICollectionViewCell {
         venueLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            venueLabel.topAnchor.constraint(equalTo: venueImage.topAnchor),
-            venueLabel.leadingAnchor.constraint(equalTo: venueImage.trailingAnchor, constant: 8),
+            venueLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            venueLabel.leadingAnchor.constraint(equalTo: venueImage.trailingAnchor, constant: 10),
             venueLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
         ])
     }
