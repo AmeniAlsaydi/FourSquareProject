@@ -199,17 +199,6 @@ extension MapViewController: UITextFieldDelegate {
 }
 
 extension MapViewController: MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        guard let annotation = view.annotation else {
-            return
-        }
-        guard let venue = (venues.filter {$0.name == annotation.title}).first else {
-            return
-        }
-        
-        
-        
-    }
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard annotation is MKPointAnnotation else {
             return nil
@@ -223,6 +212,7 @@ extension MapViewController: MKMapViewDelegate {
         } else {
             annotationView?.annotation = annotation
         }
+        
         return annotationView
     }
     func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
