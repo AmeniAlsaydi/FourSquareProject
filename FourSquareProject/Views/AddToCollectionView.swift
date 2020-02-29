@@ -40,12 +40,14 @@ class AddToCollectionView: UIView {
     
     public lazy var collectionImage: UIImageView = {
        let imageView = UIImageView()
+        imageView.isHidden = true
         imageView.image = UIImage(systemName: "tortoise.fill")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     public lazy var collectionNameTextField: UITextField = {
         let textField = UITextField()
+        textField.isHidden = true
         textField.borderStyle = .line
         textField.textAlignment = .center
         textField.placeholder = "name collection"
