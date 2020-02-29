@@ -18,11 +18,11 @@ class AddToCollectionView: UIView {
     }()
     
     public lazy var addButton: UIButton = {
-           let button = UIButton()
+        let button = UIButton()
         button.setImage(UIImage(systemName: "plus"), for: .normal)
-           return button
-       }()
-
+        return button
+    }()
+    
     public lazy var collectionList: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -30,7 +30,7 @@ class AddToCollectionView: UIView {
         return cv
     }()
     
-
+    
     public lazy var bottomButton: UIButton = {
         let button = UIButton()
         button.setTitleColor(.black, for: .normal)
@@ -39,7 +39,7 @@ class AddToCollectionView: UIView {
     }()
     
     public lazy var collectionImage: UIImageView = {
-       let imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.isHidden = true
         imageView.image = UIImage(systemName: "tortoise.fill")
         imageView.contentMode = .scaleAspectFit
@@ -58,12 +58,12 @@ class AddToCollectionView: UIView {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         commonInit()
     }
-
+    
     private func commonInit() {
         
         constrainTopLabel()
@@ -73,15 +73,15 @@ class AddToCollectionView: UIView {
         constrainTextField()
         constrainBottomButton()
     }
-
+    
     private func constrainTopLabel() {
         addSubview(topLabel)
         topLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            topLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            topLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            topLabel.topAnchor.constraint(equalTo: topAnchor),
+            topLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            topLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            topLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 0),
             topLabel.heightAnchor.constraint(equalToConstant: 50)
         ])
         
@@ -100,26 +100,26 @@ class AddToCollectionView: UIView {
     }
     
     private func constrainCV() {
-           addSubview(collectionList)
-           collectionList.translatesAutoresizingMaskIntoConstraints = false
-
-           NSLayoutConstraint.activate([
+        addSubview(collectionList)
+        collectionList.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
             collectionList.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionList.trailingAnchor.constraint(equalTo: trailingAnchor),
             collectionList.topAnchor.constraint(equalTo: topLabel.bottomAnchor),
             collectionList.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.55)
-           ])
-       }
+        ])
+    }
     
     private func constrainCollectionImage() {
         addSubview(collectionImage)
         collectionImage.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            collectionImage.leadingAnchor.constraint(equalTo: leadingAnchor),
-            collectionImage.trailingAnchor.constraint(equalTo: trailingAnchor),
+            collectionImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            collectionImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             collectionImage.topAnchor.constraint(equalTo: topLabel.bottomAnchor, constant: 8),
-            collectionImage.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3)
+            collectionImage.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
     private func constrainTextField() {
@@ -136,15 +136,25 @@ class AddToCollectionView: UIView {
     private func constrainBottomButton() {
         addSubview(bottomButton)
         bottomButton.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            //bottomButton.topAnchor.constraint(equalTo: collectionList.bottomAnchor),
-            bottomButton.trailingAnchor.constraint(equalTo: trailingAnchor),
-            bottomButton.leadingAnchor.constraint(equalTo: leadingAnchor),
-            bottomButton.bottomAnchor.constraint(equalTo: bottomAnchor),
-            bottomButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
+        
+        if collectionNameTextField.isHidden {
+            NSLayoutConstraint.activate([
+                bottomButton.topAnchor.constraint(equalTo: collectionList.bottomAnchor),
+                bottomButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+                bottomButton.leadingAnchor.constraint(equalTo: leadingAnchor),
+                //bottomButton.bottomAnchor.constraint(equalTo: bottomAnchor),
+                bottomButton.heightAnchor.constraint(equalToConstant: 50)
+            ])
+        } else {
+            NSLayoutConstraint.activate([
+                bottomButton.topAnchor.constraint(equalTo: collectionNameTextField.bottomAnchor, constant: 8),
+                bottomButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+                bottomButton.leadingAnchor.constraint(equalTo: leadingAnchor),
+                bottomButton.heightAnchor.constraint(equalToConstant: 50)
+            ])
+        }
+        
     }
-
-
+    
+    
 }

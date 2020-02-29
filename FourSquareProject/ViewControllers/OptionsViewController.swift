@@ -15,8 +15,8 @@ class OptionsViewController: UIViewController {
     private var isAddToCollectionButtonPressed = false
     
     private var keyboardIsVisible = false
-    private var originalConstraint: NSLayoutYAxisAnchor!
-    private var imageViewTopConstraint: NSLayoutYAxisAnchor!
+    private var originalConstraint: NSLayoutConstraint!
+    private var imageViewTopConstraint: NSLayoutConstraint!
     
     override func loadView() {
         view = optionsView
@@ -24,10 +24,15 @@ class OptionsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         registerKeyboardNotifications()
         setUpTargets()
         optionsView.addToCollectionView.collectionNameTextField.delegate = self
         
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        unregisterKeyboardNotifications()
     }
     
     private func setUpTargets() {
@@ -53,13 +58,10 @@ class OptionsViewController: UIViewController {
     }
     
     @objc private func cancelPressed(_ sender: UIButton) {
-        
         dismiss(animated: true, completion: nil)
     }
     
     @objc private func addToListButtonPressed(_ sender: UIButton) {
-        print("addToListButtonPressed")
-        
         
         UIView.animate(withDuration: 0.3) {
             
@@ -78,6 +80,7 @@ class OptionsViewController: UIViewController {
     @objc private func createCollectionButtonPressed(_ sender: UIButton) {
         optionsView.addToCollectionView.topLabel.text = "New Collection"
         optionsView.addToCollectionView.collectionList.isHidden = true
+        optionsView.addToCollectionView.addButton.isHidden = true
         optionsView.addToCollectionView.collectionImage.isHidden = false
         optionsView.addToCollectionView.collectionNameTextField.isHidden = false
     }
@@ -86,6 +89,7 @@ class OptionsViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
     @objc
     private func keyboardWillShow(_ notification: NSNotification) {
         guard let keyboardFrame = notification.userInfo?["UIKeyboardFrameBeginUserInfoKey"] as? CGRect else {
@@ -94,13 +98,14 @@ class OptionsViewController: UIViewController {
         moveKeyboardUp(keyboardFrame.size.height)
     }
     private func moveKeyboardUp(_ height: CGFloat) {
-         if keyboardIsVisible { return }
-        originalConstraint = optionsView.addToCollectionView.bottomAnchor
-        imageViewTopConstraint = originalConstraint
+        if keyboardIsVisible { return }
+        optionsView.bottomMenuTop?.isActive = true
+        optionsView.bottomMenuHeight?.isActive = false
         
-        let constraint = imageViewTopConstraint.constraint(equalTo: originalConstraint)
+        originalConstraint = optionsView.bottomMenuHeight
+        imageViewTopConstraint = optionsView.bottomMenuTop
         
-        constraint.constant -= height
+        imageViewTopConstraint.constant -= height / 3
         
          UIView.animate(withDuration: 0.3) {
              self.view.layoutIfNeeded()
@@ -118,12 +123,11 @@ class OptionsViewController: UIViewController {
     }
     private func resetUI() {
         keyboardIsVisible = false
-        originalConstraint = optionsView.addToCollectionView.bottomAnchor
-        let originalConstant = originalConstraint.constraint(equalTo: originalConstraint)
+        optionsView.bottomMenuTop?.constant = 0
+        optionsView.bottomMenuTop?.isActive = false
+        optionsView.bottomMenuHeight?.isActive = true
         
-        let constraint = imageViewTopConstraint.constraint(equalTo: originalConstraint)
-        
-        constraint.constant -= originalConstant.constant
+        imageViewTopConstraint = originalConstraint
         
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
@@ -132,10 +136,18 @@ class OptionsViewController: UIViewController {
     
 }
 extension OptionsViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        keyboardIsVisible = false
+        return true
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField.isSelected {
+          keyboardIsVisible = true
+        } else {
+            keyboardIsVisible = false
+        }
+        
         if string.isEmpty {
             optionsView.addToCollectionView.bottomButton.setTitle("Cancel", for: .normal)
             optionsView.addToCollectionView.bottomButton.setTitleColor(.black, for: .normal)
