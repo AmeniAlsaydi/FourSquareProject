@@ -175,15 +175,6 @@ extension OptionsViewController: UITextFieldDelegate {
         } else {
             keyboardIsVisible = false
         }
-    }
-}
-
-
-extension OptionsViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       
-        collections.count // should be the number of collections persisted.
-        
         if string.isEmpty {
             optionsView.addToCollectionView.bottomButton.setTitle("Cancel", for: .normal)
             optionsView.addToCollectionView.bottomButton.setTitleColor(.black, for: .normal)
@@ -194,6 +185,15 @@ extension OptionsViewController: UICollectionViewDataSource {
             optionsView.addToCollectionView.bottomButton.setTitleColor(.white, for: .normal)
         }
         return true
+    }
+}
+
+
+extension OptionsViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+       
+        collections.count // should be the number of collections persisted.
+        
     }
     
 
