@@ -31,6 +31,7 @@ class MapViewController: UIViewController {
             DispatchQueue.main.async {
                 self.loadMapView()
                 self.mapView.collectionView.reloadData()
+                self.listView.tableView.reloadData()
             }
             
         }
@@ -39,6 +40,7 @@ class MapViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.mapView.collectionView.reloadData()
+                self.listView.tableView.reloadData()
             }
         }
     }
@@ -187,13 +189,12 @@ extension MapViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
          let selectedVenue = venues[indexPath.row]
          let photoID = selectedVenue.id
-         
          let detailedVC = DetailViewController(datapersistance, venue: selectedVenue, photoID: photoID)
          navigationController?.pushViewController(detailedVC, animated: true)
     }
-    
-    
 }
+
+
 extension MapViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let maxsize: CGSize = UIScreen.main.bounds.size
