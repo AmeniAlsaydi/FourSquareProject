@@ -27,6 +27,7 @@ class AddToCollectionView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        cv.backgroundColor = .white
         return cv
     }()
     

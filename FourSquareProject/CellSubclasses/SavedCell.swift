@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ImageKit
 
 class SavedCell: UICollectionViewCell {
     override func layoutSubviews() {
@@ -40,6 +41,25 @@ class SavedCell: UICollectionViewCell {
         imageConstraints()
         labelConstraints()
     }
+    
+    public func configureCell(collection: Collection) {
+        
+        collectionLabel.text = collection.title
+        
+        if collection.venues.isEmpty {
+            collectionImage.image = UIImage(systemName: "plus")
+        } else {
+            collectionImage.getImage(with: collection.image) { [weak self] (result) in
+                switch result {
+                case .failure(let appError):
+                    print("issue loading collection image: \(appError)")
+                case .success(let image):
+                    self?.collectionImage.image = image
+                }
+            }
+        }
+    }
+    
     private func imageConstraints() {
         addSubview(collectionImage)
         collectionImage.translatesAutoresizingMaskIntoConstraints = false

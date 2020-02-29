@@ -49,7 +49,7 @@ class DetailViewController: UIViewController {
     @objc private func moreButtonPressed(_ sender: UIBarButtonItem) {
         print("Bar button pressed")
         
-        let optionsVC = OptionsViewController()
+        let optionsVC = OptionsViewController(dataPersistence: datapersistance, venue: venue)
         optionsVC.modalPresentationStyle = .overFullScreen
         present(optionsVC, animated: true)
     }
