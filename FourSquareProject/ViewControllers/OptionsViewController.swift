@@ -69,6 +69,37 @@ class OptionsViewController: UIViewController {
         optionsView.submitButton.addTarget(self, action: #selector(cancelPressed(_:)), for: .touchUpInside)
         optionsView.addToListButton.addTarget(self, action: #selector(addToListButtonPressed(_:)), for: .touchUpInside)
         optionsView.addToCollectionView.addButton.addTarget(self, action: #selector(createCollectionButtonPressed(_:)), for: .touchUpInside)
+        optionsView.addToCollectionView.bottomButton.addTarget(self, action: #selector(bottomButton(_:)), for: .touchUpInside)
+    }
+    
+    @objc private func bottomButton(_ sender: UIButton) {
+        
+        if sender.titleLabel?.text == "Cancel" {
+            dismiss(animated: true, completion: nil)
+        } else if sender.titleLabel?.text == "Done" {
+            print("the user has created a new collection with a single venue")
+            guard let title =  optionsView.addToCollectionView.collectionNameTextField.text else {
+                print("no title")
+                return
+            }
+            let venues = [venue]
+            
+            VenueApiClient.getVenuePhotos(venueID: venue.id) { (result) in
+                switch result {
+                case .failure(let appError):
+                    print("issue getting image in optionc VC when creating the collection: \(appError)")
+                case .success(let photos):
+                    let firstPhoto = photos.first
+                    let imageLink = "\(firstPhoto?.prefix)original\(firstPhoto?.suffix)"
+                    let newCollection = Collection(title: title, venues: venues, image: imageLink, id: self.venue.id)
+                }
+            }
+            
+            
+            
+        }
+      
+        
     }
     
     @objc private func leaveTipButtonPressed(_ sender: UIButton) {
