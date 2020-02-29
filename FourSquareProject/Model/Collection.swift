@@ -10,7 +10,7 @@ import Foundation
 
 struct Collection: Codable & Equatable {
     let title: String
-    let venues: [Venue]
+    var venues: [Venue]
     let image: String //link of first in array
     let id: String
 }
