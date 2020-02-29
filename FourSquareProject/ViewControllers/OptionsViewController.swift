@@ -22,6 +22,7 @@ class OptionsViewController: UIViewController {
         super.viewDidLoad()
         
         setUpTargets()
+        
     }
     
     private func setUpTargets() {
@@ -73,9 +74,15 @@ class OptionsViewController: UIViewController {
         isAddToCollectionButtonPressed.toggle()
         
         if isAddToCollectionButtonPressed {
+            optionsView.addToCollectionView.topLabel.text = "New Collection"
             optionsView.addToCollectionView.collectionList.isHidden = true
-            optionsView.addToListLabel.text = "New Collection"
-            
+            optionsView.addToCollectionView.collectionImage.isHidden = false
+            optionsView.addToCollectionView.collectionNameTextField.isHidden = false
+        } else {
+            optionsView.addToCollectionView.topLabel.text = "Save To"
+            optionsView.addToCollectionView.collectionList.isHidden = false
+            optionsView.addToCollectionView.collectionImage.isHidden = true
+            optionsView.addToCollectionView.collectionNameTextField.isHidden = true
         }
     }
 

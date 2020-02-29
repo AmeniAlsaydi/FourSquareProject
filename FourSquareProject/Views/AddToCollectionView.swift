@@ -10,7 +10,7 @@ import UIKit
 
 class AddToCollectionView: UIView {
     
-    private lazy var topLabel: UILabel = {
+    public lazy var topLabel: UILabel = {
         let label = UILabel()
         label.text = "Save to"
         label.textAlignment = .center
@@ -40,6 +40,7 @@ class AddToCollectionView: UIView {
     
     public lazy var collectionImage: UIImageView = {
        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "tortoise.fill")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -64,8 +65,10 @@ class AddToCollectionView: UIView {
     private func commonInit() {
         
         constrainTopLabel()
-        constrainAddButton() 
+        constrainAddButton()
         constrainCV()
+        constrainCollectionImage()
+        constrainTextField()
         constrainBottomButton()
     }
 
@@ -113,7 +116,7 @@ class AddToCollectionView: UIView {
         NSLayoutConstraint.activate([
             collectionImage.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionImage.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionImage.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionImage.topAnchor.constraint(equalTo: topLabel.bottomAnchor, constant: 8),
             collectionImage.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3)
         ])
     }
