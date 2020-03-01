@@ -77,7 +77,6 @@ class OptionsViewController: UIViewController {
         if sender.titleLabel?.text == "Cancel" {
             dismiss(animated: true, completion: nil)
         } else if sender.titleLabel?.text == "Done" {
-            print("the user has created a new collection with a single venue")
             guard let title =  optionsView.addToCollectionView.collectionNameTextField.text else {
                 print("no title")
                 return
@@ -256,12 +255,6 @@ extension OptionsViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // we have an index
-        let collectionName = collections[indexPath.row].title
-        print(collectionName)
-        
-        // get venues
-        
         var venues = collections[indexPath.row].venues
         venues.append(venue)
         var updatedCollection = collections[indexPath.row]
