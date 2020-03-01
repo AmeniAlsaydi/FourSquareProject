@@ -90,13 +90,17 @@ class OptionsViewController: UIViewController {
                     print("issue getting image in optionc VC when creating the collection: \(appError)")
                 case .success(let photos):
                     let firstPhoto = photos.first
-                    let imageLink = "\(firstPhoto?.prefix)original\(firstPhoto?.suffix)"
+                    let prefix = firstPhoto?.prefix ?? ""
+                    let suffix = firstPhoto?.suffix ?? ""
+                    let imageLink = "\(prefix)original\(suffix)"
                     let newCollection = Collection(title: title, venues: venues, image: imageLink, id: self.venue.id)
+                    do {
+                        try self.dataPersistence.createItem(newCollection)
+                    } catch {
+                        print("issue creating new Collection!")
+                    }
                 }
             }
-            
-            
-            
         }
       
         
