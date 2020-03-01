@@ -46,9 +46,8 @@ class SavedCollectionViewController: UIViewController {
         
         savedColletionView.collectionView.delegate = self
         savedColletionView.collectionView.dataSource = self
-        savedColletionView.collectionView.register(MapViewCell.self, forCellWithReuseIdentifier: "mapViewCell")
+        savedColletionView.collectionView.register(SavedVenueCell.self, forCellWithReuseIdentifier: "savedVenueCell")
     }
-    
 
 }
 extension SavedCollectionViewController: UICollectionViewDelegateFlowLayout {
@@ -68,21 +67,27 @@ extension SavedCollectionViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = savedColletionView.collectionView.dequeueReusableCell(withReuseIdentifier: "mapViewCell", for: indexPath) as? MapViewCell else {
+        guard let cell = savedColletionView.collectionView.dequeueReusableCell(withReuseIdentifier: "savedVenueCell", for: indexPath) as? SavedVenueCell else {
             fatalError("could not cast to cell")
         }
         let saved = savedVenues[indexPath.row]
         cell.configureCell(venue: saved)
+        cell.delegate = self
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? MapViewCell else {
-            return
-        }
-        showMenu(for: cell)
+        let venue = savedVenues[indexPath.row]
+        let detailVC = DetailViewController(datapersistence, venue: venue, photoID: venue.id)
+        present(detailVC, animated: true)
     }
     
-    private func showMenu(for cell: MapViewCell) {
+    
+}
+extension SavedCollectionViewController: CellButtonDelegate {
+    func didSelectButton(_ cell: SavedVenueCell, venue: Venue) {
+        showMenu(for: cell)
+    }
+    private func showMenu(for cell: SavedVenueCell) {
         guard let indexPath = savedColletionView.collectionView.indexPath(for: cell) else {
             return
         }
@@ -103,5 +108,4 @@ extension SavedCollectionViewController: UICollectionViewDataSource {
         optionsMenu.addAction(cancel)
         present(optionsMenu, animated: true, completion: nil)
     }
-    
 }
