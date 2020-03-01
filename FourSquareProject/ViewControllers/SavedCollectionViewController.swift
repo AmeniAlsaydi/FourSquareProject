@@ -48,6 +48,18 @@ class SavedCollectionViewController: UIViewController {
         savedColletionView.collectionView.dataSource = self
         savedColletionView.collectionView.register(SavedVenueCell.self, forCellWithReuseIdentifier: "savedVenueCell")
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        loadSavedVenues()
+    }
+    
+    private func loadSavedVenues() {
+        do {
+            savedVenues = try (datapersistence.loadItems().first?.venues ?? [Venue]())
+        } catch {
+            print("could not get venues")
+        }
+    }
 
 }
 extension SavedCollectionViewController: UICollectionViewDelegateFlowLayout {
@@ -72,6 +84,7 @@ extension SavedCollectionViewController: UICollectionViewDataSource {
         }
         let saved = savedVenues[indexPath.row]
         cell.configureCell(venue: saved)
+        cell.currentVenue = saved
         cell.delegate = self
         return cell
     }
@@ -97,6 +110,7 @@ extension SavedCollectionViewController: CellButtonDelegate {
             do{
                 try self?.datapersistence.deleteItem(at: indexPath.row)
                 self?.savedColletionView.collectionView.reloadData()
+                self?.loadSavedVenues()
             }catch{
                 print("could not delete")
             }
