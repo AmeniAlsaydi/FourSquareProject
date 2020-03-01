@@ -45,6 +45,10 @@ class SavedViewController: UIViewController {
         savedView.collectionView.register(SavedCell.self, forCellWithReuseIdentifier: "savedCell")
         loadCollections()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        loadCollections()
+    }
     
     private func loadCollections() {
         do {

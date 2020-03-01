@@ -10,7 +10,6 @@ import UIKit
 import DataPersistence
 import UserNotifications
 
-
 class OptionsViewController: UIViewController {
     
     private let optionsView = OptionsView()
@@ -115,6 +114,7 @@ class OptionsViewController: UIViewController {
                 return
             }
             let venues = [venue]
+            var imageLink = String()
             
             VenueApiClient.getVenuePhotos(venueID: venue.id) { (result) in
                 switch result {
@@ -124,16 +124,18 @@ class OptionsViewController: UIViewController {
                     let firstPhoto = photos.first
                     let prefix = firstPhoto?.prefix ?? ""
                     let suffix = firstPhoto?.suffix ?? ""
-                    let imageLink = "\(prefix)original\(suffix)"
-                    let newCollection = Collection(title: title, venues: venues, image: imageLink, id: self.venue.id)
-                    do {
-                        try self.dataPersistence.createItem(newCollection)
-                        self.createLocalNotification(venue: self.venue, collection: newCollection)
-                        
-                    } catch {
-                        print("issue creating new Collection!")
-                    }
+                    imageLink = "\(prefix)original\(suffix)"
+                    
                 }
+            }
+            let newCollection = Collection(title: title, venues: venues, image: imageLink, id: self.venue.id)
+            self.collections.append(newCollection)
+            do {
+                try self.dataPersistence.createItem(newCollection)
+                self.createLocalNotification(venue: self.venue, collection: newCollection)
+                
+            } catch {
+                print("issue creating new Collection!")
             }
             sleep(1)
             dismiss(animated: true, completion: nil)
