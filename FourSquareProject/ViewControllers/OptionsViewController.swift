@@ -69,6 +69,40 @@ class OptionsViewController: UIViewController {
         optionsView.submitButton.addTarget(self, action: #selector(cancelPressed(_:)), for: .touchUpInside)
         optionsView.addToListButton.addTarget(self, action: #selector(addToListButtonPressed(_:)), for: .touchUpInside)
         optionsView.addToCollectionView.addButton.addTarget(self, action: #selector(createCollectionButtonPressed(_:)), for: .touchUpInside)
+        optionsView.addToCollectionView.bottomButton.addTarget(self, action: #selector(bottomButton(_:)), for: .touchUpInside)
+    }
+    
+    @objc private func bottomButton(_ sender: UIButton) {
+        
+        if sender.titleLabel?.text == "Cancel" {
+            dismiss(animated: true, completion: nil)
+        } else if sender.titleLabel?.text == "Done" {
+            guard let title =  optionsView.addToCollectionView.collectionNameTextField.text else {
+                print("no title")
+                return
+            }
+            let venues = [venue]
+            
+            VenueApiClient.getVenuePhotos(venueID: venue.id) { (result) in
+                switch result {
+                case .failure(let appError):
+                    print("issue getting image in optionc VC when creating the collection: \(appError)")
+                case .success(let photos):
+                    let firstPhoto = photos.first
+                    let prefix = firstPhoto?.prefix ?? ""
+                    let suffix = firstPhoto?.suffix ?? ""
+                    let imageLink = "\(prefix)original\(suffix)"
+                    let newCollection = Collection(title: title, venues: venues, image: imageLink, id: self.venue.id)
+                    do {
+                        try self.dataPersistence.createItem(newCollection)
+                    } catch {
+                        print("issue creating new Collection!")
+                    }
+                }
+            }
+        }
+      
+        
     }
     
     @objc private func leaveTipButtonPressed(_ sender: UIButton) {
@@ -221,12 +255,6 @@ extension OptionsViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // we have an index
-        let collectionName = collections[indexPath.row].title
-        print(collectionName)
-        
-        // get venues
-        
         var venues = collections[indexPath.row].venues
         venues.append(venue)
         var updatedCollection = collections[indexPath.row]

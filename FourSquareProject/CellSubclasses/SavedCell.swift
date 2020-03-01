@@ -10,22 +10,19 @@ import UIKit
 import ImageKit
 
 class SavedCell: UICollectionViewCell {
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.clipsToBounds = true
-        self.layer.cornerRadius = 13
-    }
     
     public lazy var collectionLabel: UILabel = {
        let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont(name: "Helvetica", size: 20)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .light)
         return label
     }()
     public lazy var collectionImage: UIImageView = {
        let image = UIImageView()
         image.image = UIImage(systemName: "photo")
+        image.clipsToBounds = true
         image.contentMode = .scaleAspectFill
+        image.layer.cornerRadius = 13
         return image
     }()
     
@@ -65,9 +62,9 @@ class SavedCell: UICollectionViewCell {
         collectionImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             collectionImage.topAnchor.constraint(equalTo: topAnchor),
-            collectionImage.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionImage.leadingAnchor.constraint(equalTo: leadingAnchor),
-            collectionImage.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.6)
+            collectionImage.centerXAnchor.constraint(equalTo: centerXAnchor),
+            collectionImage.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.7),
+            collectionImage.widthAnchor.constraint(equalTo: collectionImage.heightAnchor)
         ])
     }
     private func labelConstraints() {
