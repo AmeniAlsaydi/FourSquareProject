@@ -28,6 +28,7 @@ class SavedViewController: UIViewController {
     init(_ dataPersistence: DataPersistence<Collection>) {
         self.datapersistence = dataPersistence
         super.init(nibName: nil, bundle: nil)
+        self.datapersistence.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -42,6 +43,7 @@ class SavedViewController: UIViewController {
         savedView.collectionView.dataSource = self
         savedView.collectionView.delegate = self
         savedView.collectionView.register(SavedCell.self, forCellWithReuseIdentifier: "savedCell")
+        loadCollections()
     }
     
     private func loadCollections() {
@@ -91,6 +93,17 @@ extension SavedViewController: UICollectionViewDataSource {
         savedCollectionVC.savedVenues = category.venues
         
         navigationController?.pushViewController(savedCollectionVC, animated: true)
+    }
+    
+    
+}
+extension SavedViewController: DataPersistenceDelegate {
+    func didSaveItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
+        loadCollections()
+    }
+    
+    func didDeleteItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
+        loadCollections()
     }
     
     
