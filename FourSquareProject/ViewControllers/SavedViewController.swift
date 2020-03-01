@@ -44,6 +44,14 @@ class SavedViewController: UIViewController {
         savedView.collectionView.register(SavedCell.self, forCellWithReuseIdentifier: "savedCell")
     }
     
+    private func loadCollections() {
+        do {
+            savedVenueCollections = try datapersistence.loadItems()
+        } catch {
+            print("could not get collections")
+        }
+    }
+    
     
 }
 extension SavedViewController: UICollectionViewDelegateFlowLayout {
