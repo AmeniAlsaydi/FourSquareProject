@@ -195,17 +195,17 @@ class OptionsViewController: UIViewController {
     }
     private func moveKeyboardUp(_ height: CGFloat) {
         if keyboardIsVisible { return }
-        optionsView.bottomMenuTop?.isActive = true
-        optionsView.bottomMenuHeight?.isActive = false
-        
-        originalConstraint = optionsView.bottomMenuHeight
-        imageViewTopConstraint = optionsView.bottomMenuTop
-        
-        imageViewTopConstraint.constant -= height / 3
         
          UIView.animate(withDuration: 0.3) {
-             self.view.layoutIfNeeded()
+            
+            self.optionsView.bottomMenuBottomAnchor?.isActive = false
+            self.optionsView.bottomMenuBottomAnchor = self.optionsView.addToCollectionView.bottomAnchor.constraint(equalTo: self.optionsView.bottomAnchor, constant: -(height + 50)
+            )
+            self.optionsView.bottomMenuBottomAnchor?.isActive = true
+            self.optionsView.layoutIfNeeded()
+
          }
+        
          keyboardIsVisible = true
      }
     
@@ -219,14 +219,12 @@ class OptionsViewController: UIViewController {
     }
     private func resetUI() {
         keyboardIsVisible = false
-        optionsView.bottomMenuTop?.constant = 0
-        optionsView.bottomMenuTop?.isActive = false
-        optionsView.bottomMenuHeight?.isActive = true
-        
-        imageViewTopConstraint = originalConstraint
-        
+
         UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
+            self.optionsView.bottomMenuBottomAnchor?.isActive = false
+            self.optionsView.bottomMenuBottomAnchor = self.optionsView.addToCollectionView.bottomAnchor.constraint(equalTo: self.optionsView.bottomAnchor, constant: 0)
+            self.optionsView.bottomMenuBottomAnchor?.isActive = true
+            self.optionsView.layoutIfNeeded()
         }
     }
     
