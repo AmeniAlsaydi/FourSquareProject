@@ -14,7 +14,7 @@ protocol CellButtonDelegate: AnyObject {
 
 class SavedVenueCell: UICollectionViewCell {
     
-    private var currentVenue: Venue!
+    public var currentVenue: Venue!
     
     weak var delegate: CellButtonDelegate?
     
@@ -40,6 +40,7 @@ class SavedVenueCell: UICollectionViewCell {
     public lazy var optionsButton: UIButton = {
        let button = UIButton()
         button.setImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
+        button.addTarget(self, action: #selector(didPressOptionsButton(_:)), for: .touchUpInside)
         button.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
         return button
     }()
@@ -90,7 +91,7 @@ class SavedVenueCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             optionsButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            optionsButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            optionsButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             optionsButton.heightAnchor.constraint(equalToConstant: 44),
             optionsButton.widthAnchor.constraint(equalTo: optionsButton.heightAnchor)
         ])
