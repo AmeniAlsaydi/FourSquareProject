@@ -123,6 +123,7 @@ class OptionsView: UIView {
     
     public lazy var addToCollectionView: AddToCollectionView = {
         let view = AddToCollectionView()
+        view.backgroundColor = .white
         view.layer.borderWidth = 1
         view.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         return view
