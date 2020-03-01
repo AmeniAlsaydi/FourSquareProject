@@ -55,8 +55,8 @@ class OptionsViewController: UIViewController {
         optionsView.addToCollectionView.collectionNameTextField.delegate = self
         
         checkForNotificationAuthorization()
-        //loadNotifications()
-        center.delegate = self //as! UNUserNotificationCenterDelegate
+        
+        center.delegate = self
     }
     
     private func checkForNotificationAuthorization() {
@@ -128,15 +128,18 @@ class OptionsViewController: UIViewController {
                     let newCollection = Collection(title: title, venues: venues, image: imageLink, id: self.venue.id)
                     do {
                         try self.dataPersistence.createItem(newCollection)
+                        self.createLocalNotification(venue: self.venue, collection: newCollection)
+
                     } catch {
                         print("issue creating new Collection!")
                     }
                 }
             }
-        // add notification it has been created and added. 
-            dismiss(animated: true, completion: nil)
+        sleep(2)
+        dismiss(animated: true, completion: nil)
+       } else {
+         dismiss(animated: true, completion: nil)
         }
-        
     }
     
     @objc private func leaveTipButtonPressed(_ sender: UIButton) {
@@ -235,15 +238,14 @@ class OptionsViewController: UIViewController {
         content.subtitle = "\(venue.name) has been saved to \(collection.title)"
         content.sound = .default
     
+        // trigger
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1 , repeats: false)
         let identifier = UUID().uuidString
         
-        // trigger
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0 , repeats: false)
-        
-         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         
         // add request to the UNNotificationCenter
-        UNUserNotificationCenter.current().add(request) { (error) in
+        center.add(request) { (error) in
             if let error = error {
                 print("error adding notification request: \(error)")
             } else {
@@ -318,10 +320,10 @@ extension OptionsViewController: UICollectionViewDelegateFlowLayout {
         
         dataPersistence.update(updatedCollection, at: indexPath.row)
         
-        // add notifcation that it has been added to collection
-        
+        // notify user it has been added
         createLocalNotification(venue: venue, collection: updatedCollection)
-        
+        sleep(2)
+        dismiss(animated: true, completion: nil)
         
     }
 
