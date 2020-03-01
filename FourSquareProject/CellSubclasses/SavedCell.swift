@@ -19,7 +19,7 @@ class SavedCell: UICollectionViewCell {
     }()
     public lazy var collectionImage: UIImageView = {
        let image = UIImageView()
-        image.image = UIImage(systemName: "photo")
+        image.image = UIImage(systemName: "plus")
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 13
@@ -43,8 +43,10 @@ class SavedCell: UICollectionViewCell {
         
         collectionLabel.text = collection.title
         
-        if collection.venues.isEmpty {
-            collectionImage.image = UIImage(systemName: "plus")
+        if collection.venues.isEmpty || collection.title == "All" {
+            collectionImage.image = UIImage(named: "addImage")
+            collectionImage.layer.borderWidth = 0.8
+            collectionImage.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         } else {
             collectionImage.getImage(with: collection.image) { [weak self] (result) in
                 switch result {

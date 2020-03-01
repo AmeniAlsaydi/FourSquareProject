@@ -8,6 +8,8 @@
 
 import UIKit
 import DataPersistence
+import UserNotifications
+
 
 class OptionsViewController: UIViewController {
     
@@ -15,6 +17,9 @@ class OptionsViewController: UIViewController {
     private let dataPersistence: DataPersistence<Collection>
     private let venue: Venue
     private var collections = [Collection]()
+    
+    private let center = UNUserNotificationCenter.current()
+
     
     init(dataPersistence: DataPersistence<Collection>, venue: Venue) {
         self.dataPersistence = dataPersistence
@@ -31,6 +36,7 @@ class OptionsViewController: UIViewController {
     private var keyboardIsVisible = false
     private var originalConstraint: NSLayoutConstraint!
     private var imageViewTopConstraint: NSLayoutConstraint!
+
     
     override func loadView() {
         view = optionsView
@@ -47,8 +53,37 @@ class OptionsViewController: UIViewController {
         print(url)
         setUpTargets()
         optionsView.addToCollectionView.collectionNameTextField.delegate = self
+        
+        checkForNotificationAuthorization()
+        //loadNotifications()
+        center.delegate = self //as! UNUserNotificationCenterDelegate
+    }
+    
+    private func checkForNotificationAuthorization() {
+      center.getNotificationSettings { (settings) in
+        if settings.authorizationStatus == .authorized {
+          print("app is authorized for notifications")
+        } else {
+          self.requestNotificationPermissions()
+        }
+      }
     }
   
+    private func requestNotificationPermissions() {
+      center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+        if let error = error {
+          print("error requesting authorization: \(error)")
+          return
+        }
+        if granted {
+          print("access was granted")
+        } else {
+          print("access denied")
+        }
+      }
+    }
+
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         unregisterKeyboardNotifications()
@@ -74,9 +109,7 @@ class OptionsViewController: UIViewController {
     
     @objc private func bottomButton(_ sender: UIButton) {
         
-        if sender.titleLabel?.text == "Cancel" {
-            dismiss(animated: true, completion: nil)
-        } else if sender.titleLabel?.text == "Done" {
+       if sender.titleLabel?.text == "Done" {
             guard let title =  optionsView.addToCollectionView.collectionNameTextField.text else {
                 print("no title")
                 return
@@ -100,8 +133,9 @@ class OptionsViewController: UIViewController {
                     }
                 }
             }
+        // add notification it has been created and added. 
+            dismiss(animated: true, completion: nil)
         }
-      
         
     }
     
@@ -196,6 +230,30 @@ class OptionsViewController: UIViewController {
         }
     }
     
+    private func createLocalNotification(venue: Venue, collection: Collection) {
+        // notifcation content:
+        let content = UNMutableNotificationContent()
+        content.title = "Venue saved"
+        content.subtitle = "\(venue.name) has been saved to \(collection.title)"
+        content.sound = .default
+    
+        let identifier = UUID().uuidString
+        
+        // trigger
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0 , repeats: false)
+        
+         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        
+        // add request to the UNNotificationCenter
+        UNUserNotificationCenter.current().add(request) { (error) in
+            if let error = error {
+                print("error adding notification request: \(error)")
+            } else {
+                 print("successfully added notification request")
+            }
+        }
+    }
+    
 }
 extension OptionsViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -262,7 +320,17 @@ extension OptionsViewController: UICollectionViewDelegateFlowLayout {
         
         dataPersistence.update(updatedCollection, at: indexPath.row)
         
+        // add notifcation that it has been added to collection
+        
+        createLocalNotification(venue: venue, collection: updatedCollection)
+        
         
     }
 
+}
+
+extension OptionsViewController: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+      completionHandler(.alert)
+    }
 }
