@@ -161,12 +161,14 @@ class MapViewController: UIViewController {
             return
         }
         
-        if venueText.isEmpty {
-            print("please fill this out")
+        if venueText.isEmpty || locationText.isEmpty {
+            self.showAlert(title: "Missing Fields 😅", message: "Tell us what you're looking for and where!", completion: nil)
         } else {
             loadVenues(state: locationText, search: venueText)
             convertPlaceNameToCoordinate(locationText)
         }
+       mapView.venueTextField.resignFirstResponder()
+       mapView.locationTextField.resignFirstResponder()
         
     }
 }

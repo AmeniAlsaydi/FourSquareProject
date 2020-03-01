@@ -13,6 +13,9 @@ class AddToCollectionView: UIView {
     public lazy var topLabel: UILabel = {
         let label = UILabel()
         label.text = "Save to"
+        label.font = UIFont.systemFont(ofSize: 17, weight: .thin)
+        label.layer.borderWidth = 0.8
+        label.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         label.textAlignment = .center
         return label
     }()
@@ -36,12 +39,17 @@ class AddToCollectionView: UIView {
         let button = UIButton()
         button.setTitleColor(.black, for: .normal)
         button.setTitle("Cancel", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .thin)
+        button.layer.borderWidth = 0.8
+        button.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         return button
     }()
     
     public lazy var collectionImage: UIImageView = {
         let imageView = UIImageView()
         imageView.isHidden = true
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 13
         imageView.image = UIImage(systemName: "tortoise.fill")
         imageView.contentMode = .scaleAspectFit
         return imageView
@@ -108,7 +116,7 @@ class AddToCollectionView: UIView {
             collectionList.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionList.trailingAnchor.constraint(equalTo: trailingAnchor),
             collectionList.topAnchor.constraint(equalTo: topLabel.bottomAnchor),
-            collectionList.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.55)
+            collectionList.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.65)
         ])
     }
     
@@ -117,10 +125,10 @@ class AddToCollectionView: UIView {
         collectionImage.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            collectionImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            collectionImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            collectionImage.centerXAnchor.constraint(equalTo: centerXAnchor),
             collectionImage.topAnchor.constraint(equalTo: topLabel.bottomAnchor, constant: 8),
-            collectionImage.heightAnchor.constraint(equalToConstant: 60)
+            collectionImage.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3),
+            collectionImage.widthAnchor.constraint(equalTo: collectionImage.heightAnchor)
         ])
     }
     private func constrainTextField() {
@@ -143,7 +151,7 @@ class AddToCollectionView: UIView {
                 bottomButton.topAnchor.constraint(equalTo: collectionList.bottomAnchor),
                 bottomButton.trailingAnchor.constraint(equalTo: trailingAnchor),
                 bottomButton.leadingAnchor.constraint(equalTo: leadingAnchor),
-                //bottomButton.bottomAnchor.constraint(equalTo: bottomAnchor),
+                bottomButton.bottomAnchor.constraint(equalTo: bottomAnchor),
                 bottomButton.heightAnchor.constraint(equalToConstant: 50)
             ])
         } else {
@@ -151,6 +159,7 @@ class AddToCollectionView: UIView {
                 bottomButton.topAnchor.constraint(equalTo: collectionNameTextField.bottomAnchor, constant: 8),
                 bottomButton.trailingAnchor.constraint(equalTo: trailingAnchor),
                 bottomButton.leadingAnchor.constraint(equalTo: leadingAnchor),
+                bottomButton.bottomAnchor.constraint(equalTo: bottomAnchor),
                 bottomButton.heightAnchor.constraint(equalToConstant: 50)
             ])
         }

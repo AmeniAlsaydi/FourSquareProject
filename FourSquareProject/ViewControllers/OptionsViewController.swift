@@ -8,6 +8,8 @@
 
 import UIKit
 import DataPersistence
+import UserNotifications
+
 
 class OptionsViewController: UIViewController {
     
@@ -15,6 +17,9 @@ class OptionsViewController: UIViewController {
     private let dataPersistence: DataPersistence<Collection>
     private let venue: Venue
     private var collections = [Collection]()
+    
+    private let center = UNUserNotificationCenter.current()
+    
     
     init(dataPersistence: DataPersistence<Collection>, venue: Venue) {
         self.dataPersistence = dataPersistence
@@ -32,6 +37,7 @@ class OptionsViewController: UIViewController {
     private var originalConstraint: NSLayoutConstraint!
     private var imageViewTopConstraint: NSLayoutConstraint!
     
+    
     override func loadView() {
         view = optionsView
     }
@@ -41,19 +47,48 @@ class OptionsViewController: UIViewController {
         optionsView.addToCollectionView.collectionList.dataSource = self
         optionsView.addToCollectionView.collectionList.delegate = self
         registerKeyboardNotifications()
-      optionsView.addToCollectionView.collectionList.register(SavedCell.self, forCellWithReuseIdentifier: "savedCell")
+        optionsView.addToCollectionView.collectionList.register(SavedCell.self, forCellWithReuseIdentifier: "savedCell")
         getCollections()
         let url = FileManager.getPath(with: "savedVenues.plist", for: .documentsDirectory)
         print(url)
         setUpTargets()
         optionsView.addToCollectionView.collectionNameTextField.delegate = self
+        
+        checkForNotificationAuthorization()
+        
+        center.delegate = self
     }
-  
+    
+    private func checkForNotificationAuthorization() {
+        center.getNotificationSettings { (settings) in
+            if settings.authorizationStatus == .authorized {
+                print("app is authorized for notifications")
+            } else {
+                self.requestNotificationPermissions()
+            }
+        }
+    }
+    
+    private func requestNotificationPermissions() {
+        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            if let error = error {
+                print("error requesting authorization: \(error)")
+                return
+            }
+            if granted {
+                print("access was granted")
+            } else {
+                print("access denied")
+            }
+        }
+    }
+    
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         unregisterKeyboardNotifications()
     }
-  
+    
     private func getCollections() {
         
         do {
@@ -74,9 +109,7 @@ class OptionsViewController: UIViewController {
     
     @objc private func bottomButton(_ sender: UIButton) {
         
-        if sender.titleLabel?.text == "Cancel" {
-            dismiss(animated: true, completion: nil)
-        } else if sender.titleLabel?.text == "Done" {
+        if sender.titleLabel?.text == "Done" {
             guard let title =  optionsView.addToCollectionView.collectionNameTextField.text else {
                 print("no title")
                 return
@@ -86,7 +119,7 @@ class OptionsViewController: UIViewController {
             VenueApiClient.getVenuePhotos(venueID: venue.id) { (result) in
                 switch result {
                 case .failure(let appError):
-                    print("issue getting image in optionc VC when creating the collection: \(appError)")
+                    print("issue getting image in option VC when creating the collection: \(appError)")
                 case .success(let photos):
                     let firstPhoto = photos.first
                     let prefix = firstPhoto?.prefix ?? ""
@@ -95,14 +128,18 @@ class OptionsViewController: UIViewController {
                     let newCollection = Collection(title: title, venues: venues, image: imageLink, id: self.venue.id)
                     do {
                         try self.dataPersistence.createItem(newCollection)
+                        self.createLocalNotification(venue: self.venue, collection: newCollection)
+                        
                     } catch {
                         print("issue creating new Collection!")
                     }
                 }
             }
+            sleep(1)
+            dismiss(animated: true, completion: nil)
+        } else {
+            dismiss(animated: true, completion: nil)
         }
-      
-        
     }
     
     @objc private func leaveTipButtonPressed(_ sender: UIButton) {
@@ -140,11 +177,42 @@ class OptionsViewController: UIViewController {
     }
     
     @objc private func createCollectionButtonPressed(_ sender: UIButton) {
+        self.optionsView.addToCollectionView.collectionImage.isHidden = false
+        
+        VenueApiClient.getVenuePhotos(venueID: venue.id) { (result) in
+            switch result {
+            case .failure(let appError):
+                DispatchQueue.main.async {
+                  self.optionsView.addToCollectionView.collectionImage.image = UIImage(systemName: "x.circle")
+
+                }
+                print("here-issues getting photos: \(appError)")
+            case .success(let photos):
+                let firstPhoto = photos.first
+                let prefix = firstPhoto?.prefix ?? ""
+                let suffix = firstPhoto?.suffix ?? ""
+                let imageLink = "\(prefix)original\(suffix)"
+                self.optionsView.addToCollectionView.collectionImage.getImage(with: imageLink) { (result) in
+                    switch result {
+                    case .failure(let appError):
+                        DispatchQueue.main.async {
+                            self.optionsView.addToCollectionView.collectionImage.image = UIImage(systemName: "x.circle")
+                        }
+                        print("issue with getting image: \(appError)")
+                    case .success(let image):
+                        DispatchQueue.main.async {
+                            self.optionsView.addToCollectionView.collectionImage.image = image
+                        }
+                    }
+                }
+                
+            }
+        }
         optionsView.addToCollectionView.topLabel.text = "New Collection"
         optionsView.addToCollectionView.collectionList.isHidden = true
         optionsView.addToCollectionView.addButton.isHidden = true
-        optionsView.addToCollectionView.collectionImage.isHidden = false
         optionsView.addToCollectionView.collectionNameTextField.isHidden = false
+        
     }
     
     private func registerKeyboardNotifications() {
@@ -162,18 +230,18 @@ class OptionsViewController: UIViewController {
     private func moveKeyboardUp(_ height: CGFloat) {
         if keyboardIsVisible { return }
         
-         UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.3) {
             
             self.optionsView.bottomMenuBottomAnchor?.isActive = false
             self.optionsView.bottomMenuBottomAnchor = self.optionsView.addToCollectionView.bottomAnchor.constraint(equalTo: self.optionsView.bottomAnchor, constant: -(height + 50)
             )
             self.optionsView.bottomMenuBottomAnchor?.isActive = true
             self.optionsView.layoutIfNeeded()
-
-         }
+            
+        }
         
-         keyboardIsVisible = true
-     }
+        keyboardIsVisible = true
+    }
     
     private func unregisterKeyboardNotifications() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -185,12 +253,35 @@ class OptionsViewController: UIViewController {
     }
     private func resetUI() {
         keyboardIsVisible = false
-
+        
         UIView.animate(withDuration: 0.3) {
             self.optionsView.bottomMenuBottomAnchor?.isActive = false
             self.optionsView.bottomMenuBottomAnchor = self.optionsView.addToCollectionView.bottomAnchor.constraint(equalTo: self.optionsView.bottomAnchor, constant: 0)
             self.optionsView.bottomMenuBottomAnchor?.isActive = true
             self.optionsView.layoutIfNeeded()
+        }
+    }
+    
+    private func createLocalNotification(venue: Venue, collection: Collection) {
+        // notifcation content:
+        let content = UNMutableNotificationContent()
+        content.title = "Venue saved"
+        content.subtitle = "\(venue.name) has been saved to \(collection.title)"
+        content.sound = .default
+        
+        // trigger
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1 , repeats: false)
+        let identifier = UUID().uuidString
+        
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        
+        // add request to the UNNotificationCenter
+        center.add(request) { (error) in
+            if let error = error {
+                print("error adding notification request: \(error)")
+            } else {
+                print("successfully added notification request")
+            }
         }
     }
     
@@ -203,14 +294,14 @@ extension OptionsViewController: UITextFieldDelegate {
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField.isSelected {
-          keyboardIsVisible = true
+            keyboardIsVisible = true
         } else {
             keyboardIsVisible = false
         }
         if string.isEmpty {
             optionsView.addToCollectionView.bottomButton.setTitle("Cancel", for: .normal)
             optionsView.addToCollectionView.bottomButton.setTitleColor(.black, for: .normal)
-        optionsView.addToCollectionView.bottomButton.backgroundColor = .white
+            optionsView.addToCollectionView.bottomButton.backgroundColor = .white
         } else {
             optionsView.addToCollectionView.bottomButton.setTitle("Done", for: .normal)
             optionsView.addToCollectionView.bottomButton.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
@@ -223,12 +314,12 @@ extension OptionsViewController: UITextFieldDelegate {
 
 extension OptionsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       
+        
         collections.count // should be the number of collections persisted.
         
     }
     
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "savedCell", for: indexPath) as? SavedCell else {
             fatalError("could not downcast to a SavedCell")
@@ -236,7 +327,7 @@ extension OptionsViewController: UICollectionViewDataSource {
         
         let collection = collections[indexPath.row]
         cell.configureCell(collection: collection)
-    
+        
         return cell
     }
 }
@@ -249,7 +340,7 @@ extension OptionsViewController: UICollectionViewDelegateFlowLayout {
         
         let itemWidth = maxSize.width * 0.30
         return CGSize(width: itemWidth, height: itemWidth)
-
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -260,7 +351,17 @@ extension OptionsViewController: UICollectionViewDelegateFlowLayout {
         
         dataPersistence.update(updatedCollection, at: indexPath.row)
         
+        // notify user it has been added
+        createLocalNotification(venue: venue, collection: updatedCollection)
+        sleep(1)
+        dismiss(animated: true, completion: nil)
         
     }
+    
+}
 
+extension OptionsViewController: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler(.alert)
+    }
 }
