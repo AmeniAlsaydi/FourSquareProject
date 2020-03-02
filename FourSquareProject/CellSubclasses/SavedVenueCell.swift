@@ -110,7 +110,9 @@ class SavedVenueCell: UICollectionViewCell {
                     self.venueImage.getImage(with: venuePhotos, writeTo: .cachesDirectory) { (result) in
                         switch result {
                         case .failure:
-                            self.venueImage.image = UIImage(systemName: "tortoise.fill")
+                            DispatchQueue.main.async {
+                                self.venueImage.image = UIImage(systemName: "tortoise.fill")
+                            }
                         case .success(let image):
                             DispatchQueue.main.async {
                                 self.venueImage.image = image
