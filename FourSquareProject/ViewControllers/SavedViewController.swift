@@ -18,7 +18,9 @@ class SavedViewController: UIViewController {
     
     private var savedVenueCollections = [Collection]() {
         didSet {
-            savedView.collectionView.reloadData()
+            DispatchQueue.main.async {
+                self.savedView.collectionView.reloadData()
+            }
         }
     }
     

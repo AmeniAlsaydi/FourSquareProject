@@ -20,6 +20,7 @@ class MapViewController: UIViewController {
     
     private var isButtonPressed = false
     
+    
 //    private lazy var tapGesture: UITapGestureRecognizer = {
 //        let gesture = UITapGestureRecognizer()
 //        gesture.addTarget(self, action: #selector(didTap(_:)))
@@ -83,6 +84,9 @@ class MapViewController: UIViewController {
         listView.tableView.register(TableViewCell.self, forCellReuseIdentifier: "tableViewCell")
         listView.tableView.delegate = self
         listView.backgroundColor = .white
+        
+        let url = FileManager.getPath(with: "savedVenues.plist", for: .documentsDirectory)
+        print(url)
     }
     
     private func loadVenues(state: String, search: String) {

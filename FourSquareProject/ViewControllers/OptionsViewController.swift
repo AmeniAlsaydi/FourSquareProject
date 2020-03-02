@@ -126,17 +126,21 @@ class OptionsViewController: UIViewController {
                     let suffix = firstPhoto?.suffix ?? ""
                     imageLink = "\(prefix)original\(suffix)"
                     
+                    let newCollection = Collection(title: title, venues: venues, image: imageLink, id: self.venue.id)
+                    
+                    self.collections.append(newCollection)
+                    do {
+                        try self.dataPersistence.createItem(newCollection)
+                        self.createLocalNotification(venue: self.venue, collection: newCollection)
+                        
+                    } catch {
+                        print("issue creating new Collection!")
+                    }
+                    
                 }
             }
-            let newCollection = Collection(title: title, venues: venues, image: imageLink, id: self.venue.id)
-            self.collections.append(newCollection)
-            do {
-                try self.dataPersistence.createItem(newCollection)
-                self.createLocalNotification(venue: self.venue, collection: newCollection)
-                
-            } catch {
-                print("issue creating new Collection!")
-            }
+            
+            
             sleep(1)
             dismiss(animated: true, completion: nil)
         } else {

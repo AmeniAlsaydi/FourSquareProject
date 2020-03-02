@@ -19,7 +19,9 @@ class SavedCell: UICollectionViewCell {
     }()
     public lazy var collectionImage: UIImageView = {
        let image = UIImageView()
-        image.image = UIImage(systemName: "plus")
+        image.image = UIImage(named: "addImage")
+        image.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        image.layer.borderWidth = 0.5
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 13
