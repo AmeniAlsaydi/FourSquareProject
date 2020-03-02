@@ -55,7 +55,7 @@ class SavedCollectionViewController: UIViewController {
     
     private func loadSavedVenues() {
         do {
-            savedVenues = try (datapersistence.loadItems().first?.venues ?? [Venue]())
+            savedVenues = try ((datapersistence.loadItems().filter {$0.title == category}).first?.venues ?? [Venue]())
         } catch {
             print("could not get venues")
         }
