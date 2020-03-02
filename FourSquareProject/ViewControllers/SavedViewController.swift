@@ -8,6 +8,7 @@
 
 import UIKit
 import DataPersistence
+import ImageKit
 
 class SavedViewController: UIViewController {
     
@@ -84,6 +85,17 @@ extension SavedViewController: UICollectionViewDataSource {
         }
         let saved = savedVenueCollections[indexPath.row]
         cell.collectionLabel.text = saved.title
+        cell.collectionImage.getImage(with: saved.image) { (result) in
+            switch result {
+            case .failure(let appError):
+                print(appError)
+                
+            case .success(let image):
+                DispatchQueue.main.async {
+                    cell.collectionImage.image = image
+                }
+            }
+        }
         cell.backgroundColor = .white
         
         return cell
